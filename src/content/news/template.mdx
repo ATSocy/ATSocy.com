@@ -1,0 +1,33 @@
+---
+title: "Template Post"
+description: "A sample draft post demonstrating the frontmatter schema and MDX authoring conventions."
+pubDate: 2026-06-17
+updatedDate: 2026-06-17
+draft: true
+tags:
+  - template
+  - astro
+  - nostr
+---
+
+This is a template post. Keep it as a draft while you are working on content. Set `draft: false` when the content is ready; the site publishes on the web immediately, and the Nostr publish step writes `nostrEventId` back into this frontmatter asynchronously.
+
+> [ATS]
+> ATS commentary can use this trigger to render as a branded editorial callout instead of plain italic text.
+
+## Frontmatter reference
+
+| Field | Required | Notes |
+|-------|----------|-------|
+| `title` | yes | Post title used in page metadata and listings. |
+| `description` | yes | Short summary for SEO, social cards, and RSS. |
+| `pubDate` | yes | Publication date (`YYYY-MM-DD`). |
+| `draft` | yes | `true` hides the post from public routes, sitemap, RSS, and Nostr. |
+| `comments` | no | `false` disables the on-page comment thread. Default: `true`. |
+| `nostr` | no | `false` skips Nostr syndication on deploy. Default: `true` for news. |
+| `tags` | yes | Array of topic tags. |
+| `nostrEventId` | optional | Written automatically by the Nostr publish step. |
+| `updatedDate` | no | Last updated date. |
+| `heroImage` | no | Path to hero image. Requires `heroImageAlt`. |
+| `heroImageAlt` | when `heroImage` set | Accessibility text for the hero image. |
+| `canonicalUrl` | no | Override canonical URL. Defaults to `{SITE_URL}/{slug}`. |

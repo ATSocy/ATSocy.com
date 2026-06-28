@@ -1,0 +1,77 @@
+---
+import Layout from '~/layouts/Layout.astro';
+---
+
+<Layout
+  title="Privacy"
+  description="Privacy notice for ATSocy, the ATSocy relay, and ATSocy-hosted media uploads."
+>
+  <section class="xnn-container-page max-w-3xl space-y-8">
+    <header class="space-y-3">
+      <h1 class="text-4xl font-semibold text-fg">Privacy</h1>
+      <p class="max-w-2xl text-sm leading-6 text-neutral-600">
+        ATSocy publishes editorial content, runs a public Nostr relay at
+        <code>relay.atsocy.com</code>, and hosts user-uploaded media at
+        <code>media.atsocy.com</code>. This page describes what operational data those services
+        may process.
+      </p>
+    </header>
+
+    <div class="space-y-8 text-sm leading-7 text-neutral-700">
+      <section class="space-y-3">
+        <h2 class="text-xl font-semibold text-fg">What ATSocy receives</h2>
+        <p>
+          When you browse the site or use this infrastructure, the servers may receive
+          standard request metadata such as IP address, user agent, requested URL, and timestamp.
+          If you upload media or publish to the relay, ATSocy also receives the Nostr
+          public key and signed events required to authenticate those actions.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-xl font-semibold text-fg">Media uploads</h2>
+        <p>
+          Media uploaded to <code>media.atsocy.com</code> is stored content-addressed by hash and
+          is not encrypted at the application layer. Uploaded files may be processed to
+          extract metadata, generate thumbnails, and run AI labels used for moderation review.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-xl font-semibold text-fg">Relay activity</h2>
+        <p>
+          ATSocy’s relay stores Nostr events and related connection metadata needed to operate a
+          public relay. Relay and media infrastructure may retain logs for abuse response,
+          moderation, debugging, and operational security.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-xl font-semibold text-fg">Operational use</h2>
+        <p>
+          ATSocy may use collected data to provide the service, investigate abuse, respond to
+          takedown or legal requests, enforce usage policies, and maintain system integrity. ATSocy
+          does not promise that uploads or relay activity are private from the operator.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-xl font-semibold text-fg">Retention</h2>
+        <p>
+          ATSocy may retain logs, uploaded files, reports, and moderation records for as long as
+          reasonably necessary for service operation, safety, dispute handling, backup recovery, or
+          legal compliance. Retention settings may change as the service evolves.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-xl font-semibold text-fg">Contact</h2>
+        <p>
+          Questions about this infrastructure can be directed through ATSocy’s public
+          contact channels linked on the site. Do not treat ATSocy-hosted services as suitable for
+          storing sensitive or regulated material.
+        </p>
+      </section>
+    </div>
+  </section>
+</Layout>

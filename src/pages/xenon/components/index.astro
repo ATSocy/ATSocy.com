@@ -1,0 +1,26 @@
+---
+import XenonDocsLayout from '~/layouts/XenonDocsLayout.astro';
+import { ComponentPreview } from '~/components/xenon/Gallery';
+import { componentCategories, componentInventory } from '~/components/xenon/inventory';
+---
+
+<XenonDocsLayout
+  title="Components"
+  description="Base UI and semantic HTML primitives."
+  path="/xenon/components"
+>
+  <div class="not-prose">
+    {componentCategories.map((category) => (
+      <section class="mb-8">
+        <h2 class="mb-2 text-body-sm font-semibold text-fg">{category}</h2>
+        <div class="border-t border-line">
+          {componentInventory
+            .filter((doc) => doc.category === category)
+            .map((doc) => (
+              <ComponentPreview client:visible doc={doc} />
+            ))}
+        </div>
+      </section>
+    ))}
+  </div>
+</XenonDocsLayout>

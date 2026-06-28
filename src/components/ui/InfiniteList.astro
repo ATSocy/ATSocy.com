@@ -1,0 +1,44 @@
+---
+/**
+ * Vanilla-JS infinite scroll for paginated content-list pages. Renders nothing
+ * server-side; emits one `is:inline` script that progressively reveals
+ * `[data-{key}-item]` rows in batches as the `[data-{key}-sentinel]` scrolls in.
+ *
+ * `key` is the data-attribute prefix shared by the list markup (e.g. `news`
+ * for `[data-news-item]` / `[data-news-sentinel]`).
+ */
+export interface Props {
+  key: string;
+  batchSize?: number;
+}
+
+const { key, batchSize = 8 } = Astro.props;
+---
+
+<script is:inline define:vars={{ key, batchSize }}>
+  const items = Array.from(document.querySelectorAll(`[data-${key}-item]`));
+  const sentinel = document.querySelector(`[data-${key}-sentinel]`);
+  let visibleCount = batchSize;
+
+  function showNextBatch() {
+    const nextCount = Math.min(visibleCount + batchSize, items.length);
+
+    for (let index = visibleCount; index < nextCount; index += 1) {
+      items[index]?.removeAttribute('hidden');
+    }
+
+    visibleCount = nextCount;
+
+    if (visibleCount >= items.length) {
+      sentinel?.remove();
+    }
+  }
+
+  if (sentinel) {
+    const observer = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) showNextBatch();
+    }, { rootMargin: '320px 0px' });
+
+    observer.observe(sentinel);
+  }
+</script>

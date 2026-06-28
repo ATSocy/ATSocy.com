@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+.astro/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Local env files
+.env
+.env.local
+.env.*.local
+
+# Wrangler
+.wrangler/
+
+# Local runtime data (dev-activity fetcher output, local relay DB, etc.)
+.local/
+
+# Generated runtime feed data
+public/dev-activity.json
+public/prices.json
+.claude/
+openspec/
+docs/
+.agents/
+skills-lock.json

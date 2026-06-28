@@ -1,0 +1,46 @@
+@import "tailwindcss";
+@plugin "@toolwind/corner-shape";
+@import "./design-system.css";
+
+.atsocy-media {
+  display: block;
+  margin-top: 1rem;
+  max-height: 36rem;
+  width: auto;
+  max-width: 100%;
+  border-radius: 28px;
+  corner-shape: squircle;
+  object-fit: contain;
+  background: transparent;
+}
+
+.atsocy-media-link {
+  display: block;
+  max-width: 100%;
+}
+
+.atsocy-media-wrap {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+}
+
+.atsocy-media-play {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.atsocy-media-play > svg {
+  width: 4.5rem;
+  height: 4.5rem;
+  color: var(--color-fg);
+  background: color-mix(in oklab, var(--color-canvas) 80%, transparent);
+  border-radius: 28px;
+  corner-shape: squircle;
+  padding: 1rem;
+  backdrop-filter: blur(4px);
+}

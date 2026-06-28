@@ -1,0 +1,10 @@
+[Unit]
+Description=Refresh ATSocy GitHub dev activity every 15 minutes
+
+[Timer]
+OnCalendar=*:0/15
+Persistent=true
+Unit=atsocy-dev-activity.service
+
+[Install]
+WantedBy=timers.target

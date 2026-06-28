@@ -1,0 +1,17 @@
+---
+import Layout from '~/layouts/Layout.astro';
+import { BouncingDotsLoader } from '~/components/ui/BouncingDotsLoader';
+import { PulsePostPage } from '~/components/pulse/PulsePostPage';
+---
+
+<Layout title="Post" description="ATSocy Pulse post and discussion." noindex>
+  <div class="xnn-container-wide -mt-8 -mb-8">
+    <div class="xnn-panel border-b-0">
+      <PulsePostPage client:only="react">
+        <div slot="fallback" class="flex min-h-[42rem] flex-col items-center justify-center gap-6 py-16">
+          <BouncingDotsLoader />
+        </div>
+      </PulsePostPage>
+    </div>
+  </div>
+</Layout>

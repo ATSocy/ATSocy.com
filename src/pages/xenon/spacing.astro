@@ -1,0 +1,23 @@
+---
+import XenonDocsLayout from '~/layouts/XenonDocsLayout.astro';
+import DocRow from '~/components/xenon/DocRow.astro';
+import DocRows from '~/components/xenon/DocRows.astro';
+import { spacingScale } from '~/components/xenon/tokens';
+---
+
+<XenonDocsLayout
+  title="Spacing"
+  description="Base unit 0.25rem. Numeric utilities derive from --spacing."
+  path="/xenon/spacing"
+>
+  <DocRows>
+    {spacingScale.map((s) => (
+      <DocRow className={`p-${s.token}`} context={s.px}>
+        <div class="flex items-center gap-3">
+          <div class="h-2.5 bg-accent" style={`width: ${s.value}`} />
+          <span class="font-mono text-caption text-fg-subtle">{s.value}</span>
+        </div>
+      </DocRow>
+    ))}
+  </DocRows>
+</XenonDocsLayout>

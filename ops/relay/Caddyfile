@@ -1,0 +1,59 @@
+# ATSocy edge proxy — replaces the former nginx relay config.
+#
+# Caddy obtains and renews TLS certificates automatically (Let's Encrypt /
+# ZeroSSL) on first request, so there is no certbot cron or manual cert path.
+# WebSocket proxying is automatic; X-Forwarded-* headers are set by default.
+#
+# Deploy: sudo install -m 0644 ops/relay/Caddyfile /etc/caddy/Caddyfile
+# Reload: sudo systemctl reload caddy
+# Docs:   docs/ATSRFRY.md
+
+relay.atsocy.com {
+	encode zstd gzip
+
+	# strfry exposes Prometheus metrics on /metrics; restrict to loopback
+	# (Prometheus scrapes from the same host).
+	@external_metrics {
+		path /metrics
+		not remote_ip 127.0.0.1 ::1
+	}
+	respond @external_metrics 403
+
+	# strfry relay. Caddy proxies WebSocket automatically; set X-Real-IP so
+	# strfry's realIpHeader = "x-real-ip" (strfry.production.conf) keeps working.
+	reverse_proxy 127.0.0.1:7777 {
+		header_up X-Real-IP {remote_host}
+	}
+}
+
+media.atsocy.com {
+	encode zstd gzip
+
+	# During initial Route96 bootstrap, uncomment the following block and replace
+	# the IP so only you can complete /setup. Remove it after your admin key has
+	# claimed the server.
+	#
+	# @blocked_setup {
+	# 	not remote_ip YOUR.PUBLIC.IP.HERE
+	# }
+	# respond @blocked_setup 403
+
+	reverse_proxy 127.0.0.1:8000
+}
+
+api.atsocy.com {
+	encode zstd gzip
+	root * /var/www/atsocy-api
+
+	# Public read-only JSON endpoints. Keep CORS open for browser consumers on
+	# other origins; these files are static, unauthenticated snapshots.
+	@prices path /prices.json
+	@dev_activity path /dev-activity.json
+	@public_json path /prices.json /dev-activity.json
+
+	header @public_json Access-Control-Allow-Origin "*"
+	header @prices Cache-Control "public, max-age=60, stale-while-revalidate=240"
+	header @dev_activity Cache-Control "public, max-age=300, stale-while-revalidate=900"
+
+	file_server
+}

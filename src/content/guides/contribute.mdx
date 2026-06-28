@@ -1,0 +1,165 @@
+---
+title: Write an Article for ATSocy
+description: Publish news, interviews, or guides on ATSocy through a GitHub pull request.
+pubDate: 2026-06-22
+draft: false
+tags:
+  - guides
+  - github
+  - authoring
+---
+
+import { CopyPrompt } from '~/components/ui/CopyPrompt';
+
+This guide shows you how to publish on ATSocy through a GitHub pull request.
+
+## Got an agent? Use it.
+
+If you use an agent, let it handle the setup and submission. Paste this in:
+
+<CopyPrompt>
+Read https://r.jina.ai/https://atsocy.com/guides/contribute — it contains the full template, frontmatter schema, and content conventions.
+
+Ask me what I want to write about before you draft anything.
+
+Create a new article in src/content/news/ following that guide. Use https://r.jina.ai/https://github.com/ATSocy/ATSocy.com/blob/main/src/content/news/template.mdx as a starting point.
+
+Open a PR against main on github.com/ATSocy/ATSocy.com when done.
+</CopyPrompt>
+
+## Set up your fork
+
+1. Fork [github.com/ATSocy/ATSocy.com](https://github.com/ATSocy/ATSocy.com) on GitHub.
+2. Clone your fork and run:
+
+```bash
+npm install
+npm run dev
+```
+
+You now have a local dev server with hot reload.
+
+## Write your article
+
+Create a new file in the right folder:
+
+| Content type | Folder | Example |
+|---|---|---|
+| News or interview | `src/content/news/` | `my-article.mdx` |
+| Know Your Alien | `src/content/kya/` | `my-interview.mdx` |
+| Guide | `src/content/guides/` | `my-guide.md` |
+
+### The basics
+
+Start with **frontmatter**, the YAML block between `---` fences that defines the article metadata:
+
+```yaml
+---
+title: "Your Article Title"
+description: "A short summary for search results and social cards."
+pubDate: 2026-06-24
+draft: true
+tags:
+  - your-tag
+  - another-tag
+---
+```
+
+Write the article body below it in Markdown. If you need components or anything beyond plain Markdown, use `.mdx` instead of `.md`.
+
+### Add an image
+
+Add a hero image by placing it in `public/images/posts/{your-slug}/` and referencing it with an absolute path in frontmatter:
+
+```yaml
+---
+heroImage: "/images/posts/my-article/my-image.png"
+heroImageAlt: "A short description of the image"
+---
+```
+
+Set `heroImageAlt` whenever you set `heroImage`. Screen readers use that text.
+
+### MDX reference
+
+MDX gives you Markdown plus component imports. These are the patterns you will use most:
+
+**Links and images**
+
+```md
+[Link text](https://example.com)
+![Alt text](../assets/image.png)
+```
+
+**Bold, italic, code**
+
+```md
+**bold text**
+*italic text*
+`inline code`
+```
+
+**Code blocks**
+
+````md
+```js
+const greeting = "Hello from ATSocy";
+console.log(greeting);
+```
+````
+
+**Headings**
+
+```md
+## Section heading
+### Subsection heading
+```
+
+**Lists**
+
+```md
+- Item one
+- Item two
+
+1. First
+2. Second
+```
+
+**Blockquotes**
+
+```md
+> This is a quote.
+```
+
+That covers most articles. Use plain Markdown unless the article needs a component.
+
+### Preview your article
+
+Open [localhost:4321](http://localhost:4321) in your browser. Your article should appear in the relevant listing page. Click through to check formatting, images, and links.
+
+## Publish it
+
+1. Commit your changes and push to your fork.
+2. Open a pull request against `main` on the upstream repo.
+3. When you're ready, set `draft: false` in frontmatter.
+
+The site builds from your PR branch so maintainers can preview it. Once merged, your article goes live at `/{slug}` (news) or `/guides/{slug}` (guides) and appears in [News](/news).
+
+## Frontmatter reference
+
+| Field | Required | Notes |
+|---|---|---|
+| `title` | yes | Your article title. |
+| `description` | yes | Short summary for SEO and social cards. |
+| `pubDate` | yes | Publication date (`YYYY-MM-DD`). |
+| `draft` | yes | `true` hides the article. Set to `false` when ready to publish. |
+| `tags` | yes | Array of topic tags. |
+| `author` | no | Your Nostr pubkey (`npub1...`). |
+| `heroImage` | no | Path to a hero image. Requires `heroImageAlt`. |
+| `heroImageAlt` | no | Accessibility text for the hero image. |
+| `comments` | no | `false` disables comments. Default: `true`. |
+| `nostr` | no | `false` skips Nostr syndication. Default: `true` for news/KYA, `false` for guides. |
+
+## Questions?
+
+Open an issue on the repo or ask in the community.

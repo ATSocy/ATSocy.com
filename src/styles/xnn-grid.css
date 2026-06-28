@@ -1,0 +1,77 @@
+/* Xenon 12-column fluid grid — column count is fixed per breakpoint; width is fluid. */
+
+:root {
+  --xnn-cols: 4;
+  --xnn-grid-gutter: 1rem;
+  --xnn-grid-margin: 1rem;
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --xnn-cols: 8;
+  }
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --xnn-cols: 12;
+  }
+}
+
+@layer components {
+  .xnn-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--xnn-cols), minmax(0, 1fr));
+    column-gap: var(--xnn-grid-gutter);
+  }
+
+  .xnn-grid--flush {
+    column-gap: 0;
+  }
+
+  .xnn-col-span-full {
+    grid-column: 1 / -1;
+  }
+
+  @media (min-width: 48rem) {
+    .md\:xnn-col-span-6 {
+      grid-column: span 6;
+    }
+
+    .md\:xnn-col-span-8 {
+      grid-column: span 8;
+    }
+
+    .md\:xnn-col-start-2 {
+      grid-column-start: 2;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .lg\:xnn-col-span-1 { grid-column: span 1; }
+    .lg\:xnn-col-span-2 { grid-column: span 2; }
+    .lg\:xnn-col-span-3 { grid-column: span 3; }
+    .lg\:xnn-col-span-4 { grid-column: span 4; }
+    .lg\:xnn-col-span-5 { grid-column: span 5; }
+    .lg\:xnn-col-span-6 { grid-column: span 6; }
+    .lg\:xnn-col-span-7 { grid-column: span 7; }
+    .lg\:xnn-col-span-8 { grid-column: span 8; }
+    .lg\:xnn-col-span-9 { grid-column: span 9; }
+    .lg\:xnn-col-span-10 { grid-column: span 10; }
+    .lg\:xnn-col-span-11 { grid-column: span 11; }
+    .lg\:xnn-col-span-12 { grid-column: span 12; }
+
+    .lg\:xnn-col-start-1 { grid-column-start: 1; }
+    .lg\:xnn-col-start-2 { grid-column-start: 2; }
+    .lg\:xnn-col-start-3 { grid-column-start: 3; }
+    .lg\:xnn-col-start-4 { grid-column-start: 4; }
+    .lg\:xnn-col-start-5 { grid-column-start: 5; }
+    .lg\:xnn-col-start-6 { grid-column-start: 6; }
+    .lg\:xnn-col-start-7 { grid-column-start: 7; }
+    .lg\:xnn-col-start-8 { grid-column-start: 8; }
+    .lg\:xnn-col-start-9 { grid-column-start: 9; }
+    .lg\:xnn-col-start-10 { grid-column-start: 10; }
+    .lg\:xnn-col-start-11 { grid-column-start: 11; }
+    .lg\:xnn-col-start-12 { grid-column-start: 12; }
+  }
+}

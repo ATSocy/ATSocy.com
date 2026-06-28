@@ -1,0 +1,110 @@
+---
+import XenonDocsLayout from '~/layouts/XenonDocsLayout.astro';
+import DocRow from '~/components/xenon/DocRow.astro';
+import DocRows from '~/components/xenon/DocRows.astro';
+import { GridVisual } from '~/components/xenon/GridVisual';
+import {
+  layoutRegions,
+  containers,
+  breakpoints,
+  gridBreakpoints,
+  gridClasses,
+  gridRecipes,
+} from '~/components/xenon/tokens';
+---
+
+<XenonDocsLayout
+  title="Layout"
+  description="Grid, containers, regions, and breakpoints."
+  path="/xenon/layout"
+>
+  <h2>Grid</h2>
+  <p class="text-body text-fg-muted">
+    Xenon uses a fluid 12-column grid. Column count is fixed per breakpoint; column width scales with the container.
+  </p>
+
+  <div class="not-prose my-6">
+    <GridVisual client:visible />
+  </div>
+
+  <DocRows>
+    {gridBreakpoints.map((bp) => (
+      <DocRow className={bp.columns} context={`${bp.gutter} gutter · ${bp.minWidth} min`}>
+        <span class="font-mono text-body-sm text-fg">{bp.name}</span>
+      </DocRow>
+    ))}
+  </DocRows>
+
+  <h2>Grid classes</h2>
+  <DocRows>
+    {gridClasses.map((g) => (
+      <DocRow className={g.className} context={g.context}>
+        <span class="font-mono text-body-sm text-fg">{g.className}</span>
+      </DocRow>
+    ))}
+  </DocRows>
+
+  <h2>Page recipes</h2>
+  <p class="text-body text-fg-muted">
+    ATSocy pages declare column spans instead of fixed rail widths.
+  </p>
+
+  <div class="not-prose my-6 border border-line bg-inset p-4">
+    <p class="mb-3 text-caption text-fg-subtle">Home at lg+</p>
+    <div class="grid grid-cols-12 gap-1">
+      <div class="col-span-3 border border-line bg-surface px-2 py-4 text-center text-caption text-fg-muted">3</div>
+      <div class="col-span-6 border border-line bg-surface px-2 py-4 text-center text-caption text-fg-muted">6</div>
+      <div class="col-span-3 border border-line bg-surface px-2 py-4 text-center text-caption text-fg-muted">3</div>
+    </div>
+    <p class="mb-3 mt-6 text-caption text-fg-subtle">Article at lg+</p>
+    <div class="grid grid-cols-12 gap-1">
+      <div class="col-span-2 border border-line bg-surface px-2 py-4 text-center text-caption text-fg-muted">2</div>
+      <div class="col-span-8 border border-line bg-surface px-2 py-4 text-center text-caption text-fg-muted">8</div>
+      <div class="col-span-2 border border-line bg-surface px-2 py-4 text-center text-caption text-fg-muted">2</div>
+    </div>
+  </div>
+
+  <DocRows>
+    {gridRecipes.map((r) => (
+      <DocRow className={r.classes} context={r.layout}>
+        <span class="text-body-sm text-fg">{r.page}</span>
+      </DocRow>
+    ))}
+  </DocRows>
+
+  <h2>Regions</h2>
+  <div class="not-prose mb-8 border border-line bg-inset p-4">
+    <div class="border border-line bg-surface px-3 py-2 text-center text-caption text-fg-muted">Header</div>
+    <div class="mt-2 grid grid-cols-[4rem_minmax(0,1fr)] gap-2">
+      <div class="border border-line bg-surface px-2 py-8 text-center text-caption text-fg-muted">Sidebar</div>
+      <div class="border border-line bg-surface px-2 py-8 text-center text-caption text-fg-muted">Main</div>
+    </div>
+    <div class="mt-2 border border-line bg-surface px-3 py-2 text-center text-caption text-fg-muted">Footer</div>
+  </div>
+
+  <DocRows>
+    {layoutRegions.map((r) => (
+      <DocRow className="—" context={r.context}>
+        <span class="text-body-sm text-fg">{r.name}</span>
+      </DocRow>
+    ))}
+  </DocRows>
+
+  <h2>Containers</h2>
+  <DocRows>
+    {containers.map((c) => (
+      <DocRow className={c.className} context={c.context}>
+        <span class="text-body-sm text-fg">{c.className}</span>
+      </DocRow>
+    ))}
+  </DocRows>
+
+  <h2>Breakpoints</h2>
+  <DocRows>
+    {breakpoints.map((bp) => (
+      <DocRow className={bp.name} context={bp.value}>
+        <span class="font-mono text-body-sm text-fg">{bp.name}</span>
+      </DocRow>
+    ))}
+  </DocRows>
+</XenonDocsLayout>

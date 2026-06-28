@@ -1,0 +1,112 @@
+---
+import {
+  TWITTER_SITE,
+  absoluteUrl,
+  resolveOgImage,
+  toIsoDate,
+} from '~/lib/ui/seo';
+import { SITE } from '~/site.config';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  ogType?: string;
+  ogImage?: string;
+  ogImageAlt?: string;
+  ogImageWidth?: number;
+  ogImageHeight?: number;
+  publishedTime?: Date | string;
+  modifiedTime?: Date | string;
+  articleTags?: string[];
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  ogType = 'website',
+  ogImage,
+  ogImageAlt,
+  ogImageWidth,
+  ogImageHeight,
+  publishedTime,
+  modifiedTime,
+  articleTags = [],
+  noindex,
+} = Astro.props;
+
+const pageTitle = title ? `${title} · ${SITE.title}` : SITE.title;
+const pageDescription = description || SITE.description;
+const pageCanonical = canonical || Astro.url.href;
+const og = resolveOgImage(ogImage, ogImageAlt);
+const ogImageResolved = {
+  url: og.url,
+  width: ogImageWidth ?? og.width,
+  height: ogImageHeight ?? og.height,
+  alt: og.alt,
+};
+const publishedIso = toIsoDate(publishedTime);
+const modifiedIso = toIsoDate(modifiedTime);
+const isArticle = ogType === 'article';
+---
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{pageTitle}</title>
+  <meta name="description" content={pageDescription} />
+  <link rel="canonical" href={pageCanonical} />
+  {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+  <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+  <meta name="theme-color" content="#e93eea" />
+
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content={title || SITE.title} />
+  <meta property="og:description" content={pageDescription} />
+  <meta property="og:url" content={pageCanonical} />
+  <meta property="og:type" content={ogType} />
+  <meta property="og:image" content={ogImageResolved.url} />
+  <meta property="og:image:alt" content={ogImageResolved.alt} />
+  {ogImageResolved.width && <meta property="og:image:width" content={String(ogImageResolved.width)} />}
+  {ogImageResolved.height && <meta property="og:image:height" content={String(ogImageResolved.height)} />}
+  <meta property="og:site_name" content={SITE.title} />
+
+  {isArticle && publishedIso && <meta property="article:published_time" content={publishedIso} />}
+  {isArticle && modifiedIso && <meta property="article:modified_time" content={modifiedIso} />}
+  {isArticle && articleTags.map((tag) => <meta property="article:tag" content={tag} />)}
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content={TWITTER_SITE} />
+  <meta name="twitter:title" content={title || SITE.title} />
+  <meta name="twitter:description" content={pageDescription} />
+  <meta name="twitter:image" content={ogImageResolved.url} />
+  <meta name="twitter:image:alt" content={ogImageResolved.alt} />
+
+  <link rel="sitemap" href={absoluteUrl('/sitemap-index.xml')} />
+  <link rel="alternate" type="application/rss+xml" title={`${SITE.title} RSS`} href={absoluteUrl('/rss.xml')} />
+
+  {import.meta.env.DEV && (
+    <script>
+      // react-scan monkey-patches React's reconciler and instruments every
+      // render on every island — a big dev-time tax. Opt in with `?scan` so it
+      // only runs when you're actually profiling.
+      if (new URLSearchParams(location.search).has('scan')) {
+        import('react-scan').then(({ scan }) =>
+          scan({
+            log: false,
+            trackUnnecessaryRenders: false,
+            showToolbar: true,
+            safeArea: { bottom: 72, right: 24 },
+          }),
+        );
+      }
+    </script>
+  )}
+</head>

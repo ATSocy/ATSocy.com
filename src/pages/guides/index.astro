@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '~/layouts/Layout.astro';
+import EditorialCard from '~/components/editorial/EditorialCard.astro';
+import InfiniteList from '~/components/ui/InfiniteList.astro';
+
+const guides = (await getCollection('guides', (guide) => !guide.data.draft)).sort(
+  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+);
+
+const initialVisible = 8;
+const dividerVariants = ['shelf', 'dots', 'stripes'] as const;
+---
+
+<Layout title="Guides" description="How-to guides for contributing to ATSocy.">
+  <div class="xnn-container-page -mt-8 -mb-8">
+    <section class="xnn-panel border-x-0 border-y-0">
+      <div class="xnn-grid xnn-grid--flush">
+        <aside class="hidden lg:xnn-col-span-3 lg:block" aria-hidden="true"></aside>
+
+        <main class="xnn-col-span-full min-w-0 px-4 py-8 lg:xnn-col-span-6 lg:border-x lg:border-line/40 lg:px-8 lg:py-10">
+          <header class="mb-8">
+            <h1 class="xnn-heading-lg text-fg">Guides</h1>
+            <p class="mt-2 xnn-body-sm text-fg-muted">Practical notes for authors and contributors.</p>
+          </header>
+
+          {guides.length > 0 ? (
+            <div data-guides-list>
+              {guides.map((guide, index) => (
+                <div data-guides-item hidden={index >= initialVisible}>
+                  <EditorialCard
+                    post={guide}
+                    variant="compact"
+                    showTags={false}
+                    showDivider={index > 0}
+                    dividerVariant={dividerVariants[index % dividerVariants.length]}
+                  />
+                </div>
+              ))}
+
+              {guides.length > initialVisible && (
+                <div data-guides-sentinel class="py-8 text-center xnn-meta">Loading more guides…</div>
+              )}
+            </div>
+          ) : (
+            <p class="xnn-body-sm">No guides yet.</p>
+          )}
+        </main>
+
+        <aside class="hidden lg:xnn-col-span-3 lg:block" aria-hidden="true"></aside>
+      </div>
+    </section>
+  </div>
+
+  <InfiniteList key="guides" batchSize={initialVisible} />
+</Layout>

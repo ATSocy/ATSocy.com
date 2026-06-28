@@ -1,0 +1,60 @@
+# ATSocy Route96 production config.
+# Intended for the Docker Compose deployment in `ops/media/route96.compose.yaml`.
+
+# Listen inside the container; Docker publishes this to localhost on the host.
+listen: "0.0.0.0:8000"
+
+# Database connection string (MYSQL / MariaDB).
+# Replace the password before deploy.
+database: "mysql://route96:CHANGE_ME_DB_PASSWORD@db:3306/route96"
+
+# Directory to store uploaded media inside the container.
+storage_dir: "/app/data"
+
+# Maximum file size allowed per upload.
+max_upload_bytes: 20971520
+
+# Public-facing base URL. Route96 uses this when building file URLs.
+public_url: "https://media.atsocy.com"
+
+# Start open. Add whitelist later when ATSocy has a rewards / paid-upload model.
+# whitelist: true
+
+# Cache AI models outside the main media directory.
+models_dir: "/app/models"
+
+# BUD-12 identical-image deduplication. This applies to images processed via
+# perceptual hashing; it is not a generic cross-type dedup switch for videos.
+identical_media_dedup: true
+identical_media_dedup_distance: 2
+identical_media_dedup_allow_override: false
+
+# AI labeling is enabled for automated moderation workflows.
+# Models are downloaded and cached on first use.
+label_models:
+  - type: vit
+    hf_repo: "google/vit-base-patch16-224"
+    name: "vit224"
+  - type: vit
+    hf_repo: "Falconsai/nsfw_image_detection"
+    name: "nsfw"
+    label_exclude:
+      - "normal"
+  - type: vit
+    hf_repo: "dima806/fairface_age_image_detection"
+    name: "age"
+    min_confidence: 0.3
+
+label_flag_terms:
+  - "nsfw"
+  - "nipple"
+  - "brassiere"
+
+# Sensible safety defaults for an internet-facing media host.
+reject_sensitive_exif: true
+reject_steganography: true
+
+# Optional retention policies. Leave disabled initially.
+# delete_zero_egress_days: 7
+# delete_unaccessed_days: 30
+# delete_after_days: 180

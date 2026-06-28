@@ -1,0 +1,10 @@
+[Unit]
+Description=Refresh ATSocy on-chain price snapshot every 5 minutes
+
+[Timer]
+OnCalendar=*:0/5
+Persistent=true
+Unit=atsocy-prices.service
+
+[Install]
+WantedBy=timers.target

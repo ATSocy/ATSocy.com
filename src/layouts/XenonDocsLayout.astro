@@ -1,0 +1,19 @@
+---
+import Layout from '~/layouts/Layout.astro';
+import XenonDocsShell from '~/components/xenon/XenonDocsShell.astro';
+
+export interface Props {
+  title: string;
+  description?: string;
+  path: string;
+}
+
+const { title, description, path } = Astro.props;
+const pageTitle = title === 'Introduction' ? 'Xenon Design System' : `${title} — Xenon`;
+---
+
+<Layout title={pageTitle} description={description}>
+  <XenonDocsShell title={title} description={description} path={path}>
+    <slot />
+  </XenonDocsShell>
+</Layout>

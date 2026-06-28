@@ -1,0 +1,52 @@
+name: Build and deploy
+
+on:
+  push:
+    branches: [main]
+
+env:
+  SITE_URL: ${{ vars.SITE_URL || 'https://atsocy.com' }}
+
+jobs:
+  build-and-deploy:
+    name: Build and deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        # `--ignore-scripts` blocks package install scripts (postinstall, etc.)
+        # so a compromised dependency can't run arbitrary code in a job that
+        # later exposes signing/deploy secrets. Astro/Vite don't need install
+        # scripts to build.
+        run: npm ci --ignore-scripts
+
+      - name: Publish eligible posts to Nostr
+        if: ${{ secrets.NOSTR_PRIVATE_KEY != '' }}
+        env:
+          NOSTR_PRIVATE_KEY: ${{ secrets.NOSTR_PRIVATE_KEY }}
+          NOSTR_RELAYS: ${{ secrets.NOSTR_RELAYS }}
+          CI: true
+        run: npm run publish:nostr
+
+      - name: Build site
+        env:
+          SITE_URL: ${{ vars.SITE_URL || 'https://atsocy.com' }}
+          PUBLIC_USE_MOCK_EVENTS: 'false'
+        run: npm run build
+
+      - name: Deploy to Cloudflare Pages
+        if: ${{ secrets.CLOUDFLARE_API_TOKEN != '' && secrets.CLOUDFLARE_ACCOUNT_ID != '' }}
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx wrangler pages deploy dist --project-name atsocy-com

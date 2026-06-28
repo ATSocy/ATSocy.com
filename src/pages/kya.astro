@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '~/layouts/Layout.astro';
+import EditorialCard from '~/components/editorial/EditorialCard.astro';
+
+const posts = (await getCollection('kya', (post) => !post.data.draft)).sort(
+  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+);
+---
+
+<Layout title="Know Your Alien" description="Interviews with people building the Zenon Network.">
+  <div class="xnn-container-page -mt-8 -mb-8">
+    <section class="xnn-panel border-x-0 border-y-0">
+      <div class="xnn-grid xnn-grid--flush">
+        <aside class="hidden lg:xnn-col-span-3 lg:block" aria-hidden="true"></aside>
+
+        <main class="xnn-col-span-full min-w-0 px-4 py-8 lg:xnn-col-span-6 lg:border-x lg:border-line/40 lg:px-8 lg:py-10">
+          <header class="mb-8">
+            <h1 class="xnn-heading-lg text-fg">Know Your Alien</h1>
+            <p class="mt-2 max-w-prose xnn-body-sm text-fg-muted">
+              The aliens know, but do you know the aliens? A series of interviews with ecosystem builders.
+            </p>
+          </header>
+
+          {posts.length > 0 ? (
+            <div>
+              {posts.map((post, index) => (
+                <EditorialCard
+                  post={post}
+                  variant="compact"
+                  showTags={false}
+                  showDivider={index > 0}
+                  dividerVariant="dots"
+                />
+              ))}
+            </div>
+          ) : (
+            <p class="xnn-body-sm">No interviews yet.</p>
+          )}
+        </main>
+
+        <aside class="hidden lg:xnn-col-span-3 lg:block" aria-hidden="true"></aside>
+      </div>
+    </section>
+  </div>
+</Layout>

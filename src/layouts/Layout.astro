@@ -1,0 +1,29 @@
+---
+import '~/styles/global.css';
+import Footer from '~/components/app/Footer.astro';
+import { FlashToast } from '~/components/ui/FlashToast';
+import Head from '~/components/app/Head.astro';
+import Header from '~/components/app/Header.astro';
+import { AgentationDev } from '~/components/rails/AgentationDev';
+import type { ComponentProps } from 'astro/types';
+
+export interface Props extends ComponentProps<typeof Head> {}
+
+const props = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <Head {...props} />
+  <body class="flex min-h-screen flex-col bg-canvas text-fg">
+    <div class="sticky top-0 z-40 bg-canvas/95 backdrop-blur-sm">
+      <Header />
+    </div>
+    <main class="w-full flex-1 py-8" transition:animate="none">
+      <slot />
+    </main>
+    <Footer />
+    <FlashToast client:load />
+    {import.meta.env.DEV && <AgentationDev client:only="react" />}
+  </body>
+</html>

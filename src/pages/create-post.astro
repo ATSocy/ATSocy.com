@@ -1,0 +1,10 @@
+---
+import Layout from '~/layouts/Layout.astro';
+import { PulseCreatePostPage } from '~/components/pulse/PulseCreatePostPage';
+---
+
+<Layout title="Create post" description="Publish a text, media, link, or poll post to ATSocy Pulse." noindex>
+  <div class="xnn-container-page -mt-8">
+    <PulseCreatePostPage client:load />
+  </div>
+</Layout>

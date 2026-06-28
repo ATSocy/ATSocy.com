@@ -1,0 +1,26 @@
+---
+import XenonDocsLayout from '~/layouts/XenonDocsLayout.astro';
+import { ComponentShowcase } from '~/components/xenon/Gallery';
+import { componentInventory } from '~/components/xenon/inventory';
+
+export function getStaticPaths() {
+  return componentInventory.map((doc) => ({
+    params: { slug: doc.id },
+    props: { doc },
+  }));
+}
+
+const { doc } = Astro.props;
+---
+
+<XenonDocsLayout title={doc.name} description={doc.purpose} path={`/xenon/components/${doc.id}`}>
+  <div class="not-prose mb-6 flex flex-wrap items-center gap-3">
+    <span class="inline-flex rounded-full border border-line px-2.5 py-1 text-caption text-fg-subtle">
+      {doc.primitive === 'base-ui' ? 'Base UI primitive' : 'Semantic HTML primitive'}
+    </span>
+    <code class="rounded bg-inset px-2.5 py-1 text-caption text-fg">{doc.source}</code>
+  </div>
+  <div class="not-prose">
+    <ComponentShowcase client:visible doc={doc} />
+  </div>
+</XenonDocsLayout>

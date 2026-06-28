@@ -1,0 +1,8 @@
+---
+import { PriceTicker } from '~/components/market/PriceTicker';
+import { loadTickerItems } from '~/lib/market/zenon-prices';
+
+const items = await loadTickerItems().catch(() => []);
+---
+
+<PriceTicker client:load items={items} />

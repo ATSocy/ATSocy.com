@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://atsocy.com/sitemap-index.xml

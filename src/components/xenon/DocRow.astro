@@ -1,0 +1,16 @@
+---
+interface Props {
+  className: string;
+  context?: string;
+}
+
+const { className, context = '—' } = Astro.props;
+---
+
+<div class="grid grid-cols-1 gap-3 border-b border-line py-5 sm:grid-cols-[minmax(0,1fr)_11rem_8rem] sm:items-center sm:gap-6">
+  <div class="min-w-0">
+    <slot />
+  </div>
+  <code class="font-mono text-caption text-fg-muted">{className}</code>
+  <p class="text-caption text-fg-subtle sm:text-right">{context}</p>
+</div>

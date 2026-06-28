@@ -1,0 +1,169 @@
+---
+import { xenonNav, xenonNeighbors, isActiveNav } from '~/components/xenon/navigation';
+
+interface Props {
+  title: string;
+  description?: string;
+  path: string;
+}
+
+const { title, description, path } = Astro.props;
+const { prev, next } = xenonNeighbors(path);
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/xenon';
+const githubUrl = 'https://github.com/ATSocy/ATSocy.com';
+---
+
+<div class="xnn-container-page px-4 sm:px-6 lg:px-8">
+  <div class="xnn-chamfer">
+    <div class="xnn-chamfer__inner">
+    <header class="flex items-center justify-between gap-4 border-b border-line px-4 py-3 sm:px-5">
+      <a href="/xenon" class="flex items-center gap-2.5 no-underline">
+        <span class="flex h-7 w-7 shrink-0 items-center justify-center border border-line text-caption font-semibold text-fg">X</span>
+        <span class="text-body-sm font-semibold text-fg">Xenon</span>
+      </a>
+      <a
+        href={githubUrl}
+        class="flex items-center gap-1.5 text-body-sm text-fg-muted no-underline hover:text-fg"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span>GitHub</span>
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
+        </svg>
+      </a>
+    </header>
+
+    <div class="lg:flex">
+      <aside class="border-b border-line lg:w-56 lg:shrink-0 lg:border-b-0 lg:border-r" aria-label="Xenon documentation">
+        <details class="group lg:hidden">
+          <summary class="flex cursor-pointer list-none items-center justify-between px-4 py-3 text-body-sm text-fg [&::-webkit-details-marker]:hidden">
+            <span>Menu</span>
+            <span class="text-fg-muted">▾</span>
+          </summary>
+          <nav class="border-t border-line px-2 pb-3 pt-2">
+            {xenonNav.map((group) => (
+              <div class="mb-3 last:mb-0">
+                <p class="px-2 py-1 text-caption text-fg-subtle">{group.title}</p>
+                <ul>
+                  {group.items.map((item) => (
+                    <li>
+                      <a
+                        href={item.href}
+                        class:list={[
+                          'block rounded px-2 py-1.5 text-body-sm',
+                          isActiveNav(item.href, currentPath)
+                            ? 'bg-raised font-semibold text-fg'
+                            : 'text-fg-muted hover:bg-inset',
+                        ]}
+                      >
+                        {item.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </nav>
+        </details>
+
+        <nav class="hidden px-2 py-4 lg:block">
+          {xenonNav.map((group) => (
+            <div class="mb-5 last:mb-0">
+              <p class="px-2 py-1 text-caption text-fg-subtle">{group.title}</p>
+              <ul class="space-y-0.5">
+                {group.items.map((item) => (
+                  <li>
+                    <a
+                      href={item.href}
+                      class:list={[
+                        'block rounded px-2 py-1.5 text-body-sm',
+                        isActiveNav(item.href, currentPath)
+                          ? 'bg-raised font-semibold text-fg'
+                          : 'text-fg-muted hover:bg-inset',
+                      ]}
+                    >
+                      {item.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </nav>
+      </aside>
+
+      <div class="min-w-0 flex-1">
+        <div class="px-5 py-8 sm:px-8 lg:py-10">
+          <header class="mb-8 border-b border-line pb-6">
+            <h1 class="text-heading-md font-semibold tracking-tight text-fg">{title}</h1>
+            {description ? <p class="mt-2 max-w-2xl text-body-sm text-fg-muted">{description}</p> : null}
+          </header>
+
+          <div class="xds-content">
+            <slot />
+          </div>
+
+          {(prev || next) && (
+            <nav class="mt-12 flex gap-4 border-t border-line pt-6" aria-label="Page navigation">
+              {prev ? (
+                <a href={prev.href} class="flex flex-1 flex-col border border-line p-3 no-underline hover:bg-inset">
+                  <span class="text-caption text-fg-subtle">Previous</span>
+                  <span class="mt-0.5 text-body-sm font-medium text-fg">{prev.label}</span>
+                </a>
+              ) : (
+                <div class="flex-1" />
+              )}
+              {next ? (
+                <a href={next.href} class="flex flex-1 flex-col items-end border border-line p-3 text-right no-underline hover:bg-inset">
+                  <span class="text-caption text-fg-subtle">Next</span>
+                  <span class="mt-0.5 text-body-sm font-medium text-fg">{next.label}</span>
+                </a>
+              ) : null}
+            </nav>
+          )}
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .xds-content :global(h2) {
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+    font-size: var(--text-body);
+    font-weight: 600;
+    color: var(--color-fg);
+  }
+
+  .xds-content :global(h2:first-child) {
+    margin-top: 0;
+  }
+
+  .xds-content :global(h3) {
+    margin-top: 1.25rem;
+    margin-bottom: 0.375rem;
+    font-size: var(--text-body-sm);
+    font-weight: 600;
+    color: var(--color-fg);
+  }
+
+  .xds-content :global(p) {
+    margin-top: 0.5rem;
+    font-size: var(--text-body-sm);
+    line-height: 1.6;
+    color: var(--color-fg-muted);
+  }
+
+  .xds-content :global(code) {
+    padding: 0.1rem 0.35rem;
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    border-radius: 0.25rem;
+    background: var(--color-inset);
+    border: 1px solid var(--color-line);
+    color: var(--color-fg);
+  }
+</style>

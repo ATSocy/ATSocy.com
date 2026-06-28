@@ -1,0 +1,109 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { ArticleCommentCount } from '~/components/article/ArticleCommentCount';
+import EditorialCard from '~/components/editorial/EditorialCard.astro';
+import HeroImage from '~/components/article/HeroImage.astro';
+import TechDivider from '~/components/xenon/TechDivider.astro';
+import { allowsComments, nostrDocumentId } from '~/lib/articles/posts';
+
+/**
+ * EditorialHero — full-width lead story, with the secondary highlights stacked
+ * as rows beneath it. Static server-rendered HTML; the editorial layer is the
+ * SEO-canonical surface.
+ */
+export interface Props {
+  lead: CollectionEntry<'news'>;
+  highlights: CollectionEntry<'news'>[];
+}
+
+const { lead, highlights } = Astro.props;
+const splitPartner = highlights[0];
+const remainingHighlights = splitPartner ? highlights.slice(1) : highlights;
+
+const formatDate = (date: Date) =>
+  date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
+
+const dividerVariants = ['shelf', 'dots', 'stripes'] as const;
+---
+
+<div class="flex flex-col gap-8">
+  {splitPartner ? (
+    <article class="group/editorial-hero xds-material-medium overflow-hidden rounded-[64px] corner-squircle">
+      <div class="relative overflow-hidden">
+        <a href={`/${lead.id}`} aria-hidden="true" tabindex="-1" class="block cursor-pointer">
+          {lead.data.heroImage && (
+            <HeroImage
+              image={lead.data.heroImage}
+              alt={lead.data.heroImageAlt}
+              widths={[768, 1280, 1600]}
+              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 66vw, 960px"
+              class="block aspect-[16/9] w-full object-cover transition-opacity duration-300 group-has-[.editorial-hero-alt:hover]/editorial-hero:opacity-0"
+            />
+          )}
+        </a>
+        <a
+          href={`/${splitPartner.id}`}
+          aria-hidden="true"
+          tabindex="-1"
+          class="pointer-events-none absolute inset-0 block cursor-pointer group-has-[.editorial-hero-alt:hover]/editorial-hero:pointer-events-auto"
+        >
+          {splitPartner.data.heroImage && (
+            <HeroImage
+              image={splitPartner.data.heroImage}
+              alt={splitPartner.data.heroImageAlt}
+              widths={[768, 1280, 1600]}
+              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 66vw, 960px"
+              class="block aspect-[16/9] w-full object-cover opacity-0 transition-opacity duration-300 group-has-[.editorial-hero-alt:hover]/editorial-hero:opacity-100"
+            />
+          )}
+        </a>
+      </div>
+
+      <div class="border-t border-line/30 bg-surface-2">
+        <div class="relative grid md:grid-cols-2">
+          <div class="pointer-events-none absolute inset-y-0 left-1/2 hidden -translate-x-1/2 md:block" aria-hidden="true">
+            <TechDivider orientation="vertical" variant="stripes" class="h-full" />
+          </div>
+
+          <a href={`/${lead.id}`} class="group block cursor-pointer bg-surface-2 px-8 py-6 no-underline transition-colors md:px-10 md:py-8">
+            <h3 class="mt-1 xnn-editorial-title-lg">
+              <span class="xnn-title-link transition-colors group-hover:text-accent">{lead.data.title}</span>
+            </h3>
+            <p class="mt-3 max-w-prose xnn-editorial-summary">{lead.data.description}</p>
+            <p class="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 xnn-editorial-meta">{formatDate(lead.data.pubDate)}{allowsComments(lead) && <ArticleCommentCount client:visible slug={nostrDocumentId(lead)} href={`/${lead.id}#comments`} />}</p>
+          </a>
+
+          <a href={`/${splitPartner.id}`} class="group editorial-hero-alt block cursor-pointer border-t border-line/30 bg-surface-2 px-8 py-6 no-underline transition-colors md:border-t-0 md:px-10 md:py-8">
+            <h3 class="mt-1 xnn-editorial-title-lg">
+              <span class="xnn-title-link transition-colors group-hover:text-accent">
+                {splitPartner.data.title}
+              </span>
+            </h3>
+            <p class="mt-3 max-w-prose xnn-editorial-summary">{splitPartner.data.description}</p>
+            <p class="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 xnn-editorial-meta">{formatDate(splitPartner.data.pubDate)}{allowsComments(splitPartner) && <ArticleCommentCount client:visible slug={nostrDocumentId(splitPartner)} href={`/${splitPartner.id}#comments`} />}</p>
+          </a>
+        </div>
+      </div>
+    </article>
+  ) : (
+    <EditorialCard post={lead} variant="lead" />
+  )}
+
+  {remainingHighlights.length > 0 && (
+    <div class="flex flex-col">
+      {remainingHighlights.map((post, index) => (
+        <EditorialCard
+          post={post}
+          variant="compact"
+          showTags={false}
+          showDivider={index > 0}
+          dividerVariant={dividerVariants[index % dividerVariants.length]}
+        />
+      ))}
+    </div>
+  )}
+</div>

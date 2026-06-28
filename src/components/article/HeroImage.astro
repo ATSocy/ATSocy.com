@@ -1,0 +1,34 @@
+---
+/**
+ * HeroImage — renders an article hero as either Astro's optimized `<Image>`
+ * (for local imports) or a plain `<img>` (for remote URL strings). This is the
+ * single owner of the local-vs-remote branch; call sites pass responsive sizes
+ * and let it decide the element.
+ *
+ * See `src/lib/articles/hero-images.ts` for the `HeroImage` type and helpers.
+ */
+import { Image } from 'astro:assets';
+import { isLocalHeroImage, type HeroImage } from '~/lib/articles/hero-images';
+
+export interface Props {
+  image: HeroImage;
+  alt?: string;
+  /** `widths` passed to Astro `<Image>` for local images. Ignored for remote. */
+  widths?: number[];
+  /** `sizes` passed to Astro `<Image>` for local images. Ignored for remote. */
+  sizes?: string;
+  /** Native loading hint. Local images default to `eager` (hero is above the fold). */
+  loading?: 'eager' | 'lazy';
+  class?: string;
+}
+
+const { image, alt = '', widths, sizes, loading = 'eager', class: className } = Astro.props;
+---
+
+{
+  image && isLocalHeroImage(image) ? (
+    <Image src={image} alt={alt} widths={widths} sizes={sizes} class={className} />
+  ) : (
+    <img src={typeof image === 'string' ? image : undefined} alt={alt} class={className} loading={loading} decoding="async" />
+  )
+}

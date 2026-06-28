@@ -1,0 +1,33 @@
+services:
+  db:
+    image: mariadb:11
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: route96
+      MARIADB_USER: route96
+      MARIADB_PASSWORD: CHANGE_ME_DB_PASSWORD
+      MARIADB_ROOT_PASSWORD: CHANGE_ME_ROOT_PASSWORD
+    command: ["mariadbd", "--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci"]
+    volumes:
+      - /srv/blossom/db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mariadb-admin ping -h localhost -p$$MARIADB_ROOT_PASSWORD"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+  app:
+    build:
+      context: ./app
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      RUST_LOG: info
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - /srv/blossom/data:/app/data
+      - /srv/blossom/models:/app/models
+      - /srv/blossom/config.yaml:/app/config.yaml:ro

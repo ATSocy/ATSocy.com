@@ -1,0 +1,102 @@
+---
+type Orientation = 'horizontal' | 'vertical';
+type Variant = 'shelf' | 'stripes' | 'dots' | 'plain';
+type Placement = 'start' | 'center' | 'end';
+
+interface Props {
+  orientation?: Orientation;
+  variant?: Variant;
+  placement?: Placement;
+  flip?: boolean;
+  class?: string;
+}
+
+const {
+  orientation = 'horizontal',
+  variant = 'shelf',
+  placement = 'center',
+  flip = false,
+  class: className,
+} = Astro.props;
+const resolvedVariant = variant === 'plain' ? 'shelf' : variant;
+const isVertical = orientation === 'vertical';
+
+const placementCenter = { start: 330, center: 500, end: 670 }[placement];
+const placementOffset = `${placementCenter / 10}%`;
+
+function singleNotchPath(flat: number, ramp: number) {
+  const depth = flip ? 4 : 12;
+  const a = placementCenter - flat / 2 - ramp;
+  const b = placementCenter - flat / 2;
+  const c = placementCenter + flat / 2;
+  const d = placementCenter + flat / 2 + ramp;
+
+  return isVertical
+    ? `M8 0 V${a} L${depth} ${b} V${c} L8 ${d} V1000`
+    : `M0 8 H${a} L${b} ${depth} H${c} L${d} 8 H1000`;
+}
+
+const strokePath = resolvedVariant === 'stripes'
+  ? isVertical
+    ? 'M8 0 V280 L12 295 V365 L8 380 V620 L4 635 V705 L8 720 V1000'
+    : 'M0 8 H280 L295 12 H365 L380 8 H620 L635 4 H705 L720 8 H1000'
+  : singleNotchPath(resolvedVariant === 'dots' ? 96 : 110, resolvedVariant === 'dots' ? 8 : 15);
+
+const accentPosition = isVertical
+  ? flip
+    ? { x: 2, y1: placementCenter - 15, y2: placementCenter + 15 }
+    : { x: 14, y1: placementCenter - 15, y2: placementCenter + 15 }
+  : flip
+    ? { y: 2, x1: placementCenter - 15, x2: placementCenter + 15 }
+    : { y: 14, x1: placementCenter - 15, x2: placementCenter + 15 };
+
+const dotPositions = [placementCenter - 8, placementCenter, placementCenter + 8];
+const dotCrossAxis = flip ? 6.5 : 9.5;
+---
+
+<div
+  class:list={[
+    'xnn-divider',
+    isVertical ? 'xnn-divider--vertical' : 'xnn-divider--horizontal',
+    `xnn-divider--${resolvedVariant}`,
+    className,
+  ]}
+  style={`--xnn-divider-placement: ${placementOffset}; --xnn-divider-dot-x: ${flip ? '0.375rem' : '0.625rem'}`}
+  role="separator"
+  aria-orientation={orientation}
+>
+  <svg
+    class="xnn-divider__notch"
+    viewBox={isVertical ? '0 0 16 1000' : '0 0 1000 16'}
+    preserveAspectRatio="none"
+    aria-hidden="true"
+  >
+    <path class="xnn-divider__stroke" d={strokePath} />
+
+    {resolvedVariant === 'shelf' && (
+      <path
+        class="xnn-divider__accent"
+        d={isVertical
+          ? `M${accentPosition.x} ${accentPosition.y1} V${accentPosition.y2}`
+          : `M${accentPosition.x1} ${accentPosition.y} H${accentPosition.x2}`}
+      />
+    )}
+
+    {resolvedVariant === 'dots' && (
+      <g>
+        {!isVertical && (
+          <>
+            {dotPositions.map((x) => <path class="xnn-divider__mark xnn-divider__dot" d={`M${x} ${dotCrossAxis} h0.01`} />)}
+          </>
+        )}
+      </g>
+    )}
+  </svg>
+  {resolvedVariant === 'dots' && isVertical && (
+    <span class="xnn-divider__dot-stack" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+    </span>
+  )}
+</div>

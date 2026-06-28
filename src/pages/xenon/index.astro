@@ -1,0 +1,68 @@
+---
+import XenonDocsLayout from '~/layouts/XenonDocsLayout.astro';
+import TechDivider from '~/components/xenon/TechDivider.astro';
+import { BouncingDotsLoader } from '~/components/ui/BouncingDotsLoader';
+
+const horizontalVariants = [
+  { label: 'shelf', variant: 'shelf' as const },
+  { label: 'stripes', variant: 'stripes' as const },
+  { label: 'dots', variant: 'dots' as const },
+];
+---
+
+<XenonDocsLayout
+  title="Introduction"
+  description="Foundations, layout, and Base UI components for NoM interfaces."
+  path="/xenon"
+>
+  <p>
+    Xenon documents the tokens and primitives behind ATSocy. Newsreader carries display type;
+    Inter carries UI and body. Pink is the accent scale.
+  </p>
+
+  <h2>Foundations</h2>
+  <div class="not-prose">
+    {[
+      { href: '/xenon/colors', name: 'Colors', context: 'OKLCH scales' },
+      { href: '/xenon/typography', name: 'Typography', context: 'Display and body' },
+      { href: '/xenon/materials', name: 'Materials', context: 'Surfaces and elevation' },
+      { href: '/xenon/spacing', name: 'Spacing', context: '0.25rem base' },
+      { href: '/xenon/layout', name: 'Layout', context: 'Regions and containers' },
+    ].map((item) => (
+      <a href={item.href} class="grid grid-cols-1 gap-1 border-b border-line py-3 no-underline sm:grid-cols-[10rem_minmax(0,1fr)] sm:gap-6">
+        <span class="text-body-sm font-medium text-fg">{item.name}</span>
+        <span class="text-body-sm text-fg-muted">{item.context}</span>
+      </a>
+    ))}
+  </div>
+
+  <h2 class="mt-8">Dividers</h2>
+  <p>
+    Thin rule segments with a fixed-width tech notch for shelf, stripe, and dot accents.
+  </p>
+
+  <div class="not-prose my-6 space-y-5">
+    {horizontalVariants.map((item) => (
+      <div>
+        <p class="mb-2 text-caption text-fg-subtle">{item.label}</p>
+        <TechDivider variant={item.variant} />
+      </div>
+    ))}
+  </div>
+
+  <TechDivider variant="stripes" class="my-8" />
+
+  <h2>Loader</h2>
+  <p>
+    The Pulse loading state uses the same three-dot bounce loop. This preview keeps it live on the page.
+  </p>
+
+  <div class="not-prose my-6 rounded-[28px] corner-squircle border border-line bg-surface px-6 py-10">
+    <div class="flex min-h-[10rem] items-center justify-center">
+      <BouncingDotsLoader />
+    </div>
+  </div>
+
+  <h2>Components</h2>
+  <p><a href="/xenon/components" class="text-fg underline">Base UI inventory</a> — interactive primitives and semantic surfaces.</p>
+</XenonDocsLayout>

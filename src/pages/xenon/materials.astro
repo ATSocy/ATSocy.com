@@ -1,0 +1,36 @@
+---
+import XenonDocsLayout from '~/layouts/XenonDocsLayout.astro';
+import DocRow from '~/components/xenon/DocRow.astro';
+import DocRows from '~/components/xenon/DocRows.astro';
+import { materials } from '~/components/xenon/tokens';
+---
+
+<XenonDocsLayout
+  title="Materials"
+  description="Presets for radii, fills, strokes, and shadows."
+  path="/xenon/materials"
+>
+  <h2>Surface</h2>
+  <p>On the page.</p>
+  <DocRows>
+    {materials.filter((m) => m.tier === 'surface').map((m) => (
+      <DocRow className={m.className} context={m.context}>
+        <div class={`${m.className} flex h-20 w-full max-w-[240px] items-center justify-center text-caption text-fg-muted`}>
+          {m.name}
+        </div>
+      </DocRow>
+    ))}
+  </DocRows>
+
+  <h2>Floating</h2>
+  <p>Above the page.</p>
+  <DocRows>
+    {materials.filter((m) => m.tier === 'floating').map((m) => (
+      <DocRow className={m.className} context={m.context}>
+        <div class={`${m.className} flex h-20 w-full max-w-[240px] items-center justify-center p-4 text-caption text-fg-muted`}>
+          {m.name}
+        </div>
+      </DocRow>
+    ))}
+  </DocRows>
+</XenonDocsLayout>

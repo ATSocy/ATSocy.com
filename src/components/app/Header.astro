@@ -1,0 +1,25 @@
+---
+import { Logo } from '~/components/ui/Logo';
+import PriceTicker from '~/components/market/PriceTicker.astro';
+import { UserMenu } from '~/components/identity/UserMenu';
+---
+
+<header class="border-b border-line bg-canvas/95 backdrop-blur-sm">
+  <div class="xnn-container-page grid h-16 grid-cols-3 items-center">
+    <div class="justify-self-start" aria-hidden="true"></div>
+
+    <a
+      href="/"
+      aria-label="ATSocy home"
+      class="justify-self-center text-fg no-underline hover:text-fg"
+    >
+      <Logo className="h-6 w-auto" />
+    </a>
+
+    <div class="justify-self-end">
+      <UserMenu client:load />
+    </div>
+  </div>
+
+  <PriceTicker />
+</header>

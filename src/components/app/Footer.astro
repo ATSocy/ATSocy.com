@@ -1,0 +1,219 @@
+---
+import { Logo } from '~/components/ui/Logo';
+import TechRule from '~/components/ui/TechRule.astro';
+import TechDivider from '~/components/xenon/TechDivider.astro';
+import { Badge } from '~/components/ui/Badge';
+import { NostrRelayStatus } from '~/components/nostr/NostrRelayStatus';
+import { NodeStatus } from '~/components/nostr/NodeStatus';
+
+const NOSTR_PROFILE_URL = 'https://nostr.com/nprofile1qqstefhn3k2jdey9s3awpvuthd3vymu4660xvprzrs0s9rwsrcad79cn9kyvn';
+const GITHUB_URL = 'https://github.com/ATSocy';
+const CONTRIBUTE_URL = '/guides/contribute';
+const X_URL = 'https://x.com/atsocy';
+
+type FooterDividerVariant = 'shelf' | 'stripes' | 'dots';
+type FooterDividerPlacement = 'start' | 'center' | 'end';
+
+interface FooterLink {
+  label: string;
+  href?: string;
+  external?: boolean;
+  soon?: boolean;
+  icon?: 'rss';
+}
+
+interface FooterColumn {
+  title: string;
+  links: readonly FooterLink[];
+  divider: FooterDividerVariant;
+  placement?: FooterDividerPlacement;
+  flip?: boolean;
+}
+
+const columns: readonly FooterColumn[] = [
+  {
+    title: 'Editorial',
+    links: [
+      { label: 'News', href: '/news' },
+      { label: 'Know Your Alien', href: '/kya' },
+      { label: 'Guides', href: '/guides' },
+    ],
+    divider: 'shelf',
+    placement: 'start',
+  },
+  {
+    title: 'Explore',
+    links: [
+      { label: 'Pulse', href: '/#pulse' },
+      { label: 'Dev Activity', href: '/#dev-activity' },
+      { label: 'Channels', href: '/#channels', soon: true },
+      { label: 'RSS', href: '/rss.xml', icon: 'rss' },
+    ],
+    divider: 'stripes',
+  },
+  {
+    title: 'ATSocy',
+    links: [
+      { label: 'Rewards', soon: true },
+    ],
+    divider: 'dots',
+    placement: 'end',
+    flip: true,
+  },
+  {
+    title: 'Social',
+    links: [
+      { label: 'Nostr', href: NOSTR_PROFILE_URL, external: true },
+      { label: 'GitHub', href: GITHUB_URL, external: true },
+      { label: 'X', href: X_URL, external: true },
+    ],
+    divider: 'shelf',
+    placement: 'center',
+    flip: true,
+  },
+];
+
+---
+
+<footer class="atsocy-footer">
+  <div class="atsocy-footer__rule">
+    <TechRule />
+  </div>
+
+  <div class="atsocy-footer__shell">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      {/* ── Nav grid with vertical tech dividers ── */}
+      <div class="grid grid-cols-2 gap-x-8 gap-y-10 sm:gap-x-10 lg:grid-cols-[1.15fr_1.15fr_1.15fr_1fr] lg:gap-0">
+        {columns.map((column, index) => (
+          <section class="relative flex min-w-0 flex-col lg:min-h-48 lg:px-8 lg:pt-2 lg:pb-4">
+            <TechDivider
+              orientation="vertical"
+              variant={column.divider}
+              placement={column.placement}
+              flip={column.flip}
+              class="absolute left-0 top-0 hidden lg:block"
+            />
+            <div>
+              <h2 class="atsocy-footer__col-title">{column.title}</h2>
+              <ul class="mt-3 space-y-2.5 text-body-sm leading-body text-neutral-700 lg:mt-8 lg:space-y-5 lg:text-body-lg">
+                {index === 2 && (
+                  <li>
+                    <NostrRelayStatus client:only="react" />
+                  </li>
+                  <li>
+                    <NodeStatus client:only="react" />
+                  </li>
+                )}
+                {column.links.map((link) => (
+                  <li>
+                    {!link.href ? (
+                      <span class="inline-flex items-center gap-1.5 text-neutral-500">
+                        <span>{link.label}</span>
+                        {link.soon && <Badge variant="outline">zoon</Badge>}
+                      </span>
+                    ) : (
+                      <a
+                        href={link.href}
+                        class="atsocy-footer-link inline-flex items-center gap-1.5 text-neutral-700 no-underline"
+                        {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                      >
+                        {link.label}
+                        {link.soon && <Badge variant="outline">zoon</Badge>}
+                        {link.icon === 'rss' && (
+                          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true" class="shrink-0 text-neutral-400">
+                            <path fill="currentColor" d="M4 10h6v2H4zm8 4h2v6h-2zm6 0h2v6h-2zM4 16h4v4H4zm12-6h2v4h-2zm-2-2h2v2h-2zM4 4h6v2H4zm6 2h4v2h-4zm0 6h2v2h-2z" />
+                          </svg>
+                        )}
+                      </a>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+
+            {/* Desktop: the "We Want You" poster in the ATSocy column */}
+            {index === 2 && (
+              <div class="mt-4 min-w-0 text-center lg:block">
+                <a
+                  href={CONTRIBUTE_URL}
+                  class="inline-block max-w-full overflow-hidden rounded-[20px] corner-squircle no-underline transition-opacity hover:opacity-90"
+                  aria-label="Contribute an article"
+                >
+                  <img
+                    src="/atsocy-we-want-you.png"
+                    alt="ATSocy wants you"
+                    width="369"
+                    height="160"
+                    class="block h-auto w-auto border border-x-accent-strong shadow-raised rounded-[20px] corner-squircle"
+                    loading="lazy"
+                  />
+                </a>
+              </div>
+            )}
+          </section>
+        ))}
+      </div>
+
+
+      {/* ── Endpoint: ATS wordmark in Star Wars-crawl perspective ── */}
+      <div class="atsocy-footer__logo-stage">
+        <div class="atsocy-footer__logo-tilt">
+          <Logo className="block h-auto w-full text-fg opacity-10" />
+        </div>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<style>
+  .atsocy-footer__shell {
+    background: var(--color-raised);
+    color: var(--color-fg);
+  }
+
+  /* Flush the tech rule against the shell. */
+  .atsocy-footer__rule :global(.xnn-tech-rule) {
+    margin-bottom: 0;
+  }
+
+  .atsocy-footer__col-title {
+    font-family: var(--font-mono);
+    font-size: var(--text-caption);
+    line-height: 1.4;
+    padding-top: 15px;
+    letter-spacing: var(--tracking-label);
+    color: var(--color-neutral-500);
+  }
+
+  /* ── Endpoint wordmark: recede into a top-center vanishing point ── */
+  .atsocy-footer__logo-stage {
+    perspective: 340px;
+    perspective-origin: 50% 0%;
+    padding-top: clamp(2rem, 4vw, 3.5rem);
+  }
+
+  .atsocy-footer__logo-tilt {
+    transform: rotateX(50deg);
+    transform-origin: 50% 100%;
+  }
+
+  /* ── Animated underline for footer text links ── */
+  .atsocy-footer-link {
+    background-image: linear-gradient(var(--color-accent), var(--color-accent));
+    background-size: 0% 1.5px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    padding-bottom: 1.5px;
+    transition: background-size 0.25s ease, color 0.15s ease;
+  }
+
+
+  @media (prefers-reduced-motion: reduce) {
+    .atsocy-footer-link,
+    .atsocy-footer-link * {
+      transition: none;
+    }
+  }
+</style>

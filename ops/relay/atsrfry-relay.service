@@ -1,0 +1,22 @@
+[Unit]
+Description=ATSocy atsrfry relay
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=atsrfry
+Group=atsrfry
+ExecStart=/usr/local/bin/strfry --config /etc/atsrfry/strfry.conf relay
+Restart=on-failure
+RestartSec=5
+LimitNOFILE=524288
+WorkingDirectory=/var/lib/atsrfry
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/var/lib/atsrfry
+
+[Install]
+WantedBy=multi-user.target

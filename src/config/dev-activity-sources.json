@@ -1,0 +1,14 @@
+{
+  "sources": [
+    { "type": "org", "name": "zenon-network" },
+    { "type": "org", "name": "ATSocy" },
+    { "type": "org", "name": "zenon-red" },
+    { "type": "user", "name": "coinselor" },
+    { "type": "user", "name": "0x3639" },
+    { "type": "user", "name": "digitalSloth" },
+    { "type": "user", "name": "TminusZ" }
+  ],
+  "exclude": [
+    "dependabot[bot]"
+  ]
+}

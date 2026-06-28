@@ -1,0 +1,17 @@
+[Unit]
+Description=ATSocy GitHub dev-activity snapshot fetcher
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=atsocy-api
+Group=atsocy-api
+WorkingDirectory=/srv/atsocy.com
+EnvironmentFile=/etc/atsocy/dev-activity.env
+ExecStart=/usr/bin/npm run fetch:dev-activity
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/var/www/atsocy-api

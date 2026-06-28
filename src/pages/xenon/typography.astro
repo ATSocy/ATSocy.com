@@ -1,0 +1,32 @@
+---
+import XenonDocsLayout from '~/layouts/XenonDocsLayout.astro';
+import DocRow from '~/components/xenon/DocRow.astro';
+import DocRows from '~/components/xenon/DocRows.astro';
+import { headingScale, bodyScale } from '~/components/xenon/tokens';
+---
+
+<XenonDocsLayout
+  title="Typography"
+  description="Newsreader for display. Inter for UI and body."
+  path="/xenon/typography"
+>
+  <p>Styles map to utility classes and earned <code>xnn-*</code> components.</p>
+
+  <h2>Headings</h2>
+  <DocRows>
+    {headingScale.map((row) => (
+      <DocRow className={row.className} context={row.context}>
+        <span class={row.className}>{row.sample}</span>
+      </DocRow>
+    ))}
+  </DocRows>
+
+  <h2>Body</h2>
+  <DocRows>
+    {bodyScale.map((row) => (
+      <DocRow className={row.className} context={row.context}>
+        <span class={row.className}>{row.sample}</span>
+      </DocRow>
+    ))}
+  </DocRows>
+</XenonDocsLayout>

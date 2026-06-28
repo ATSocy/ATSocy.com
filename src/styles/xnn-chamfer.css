@@ -1,0 +1,56 @@
+/* Chamfered shell via clip-path.
+ *
+ * Top inset (relative to --xnn-inset-left, 0):
+ *   (0, 0) → (ramp, depth) → (ramp+flat, depth) → (total, 0)
+ *   i.e. (15,15) in, 100 flat at y=15, (130,0) out — symmetric 45° ramps.
+ */
+
+@layer components {
+  .xnn-chamfer {
+    container-type: inline-size;
+
+    --xnn-c-default: clamp(0.75rem, 2.5cqmin, 1.875rem);
+    --xnn-c-tr: clamp(0.5rem, 1.25cqmin, 0.9375rem);
+    --xnn-c-tl: var(--xnn-c-default);
+    --xnn-c-br: var(--xnn-c-default);
+    --xnn-c-bl: var(--xnn-c-default);
+
+    --xnn-edge-pad: var(--xnn-c-default);
+    --xnn-inset-left: 36%;
+
+    /* ~15px — 45° ramp in/out (depth matches for symmetry) */
+    --xnn-inset-ramp: clamp(0.5rem, 1.25cqmin, 0.9375rem);
+    --xnn-inset-depth: var(--xnn-inset-ramp);
+    /* ~100px — flat shelf between ramps */
+    --xnn-inset-flat: clamp(3rem, 12cqw, 6.25rem);
+    --xnn-inset-flat-end: calc(var(--xnn-inset-ramp) + var(--xnn-inset-flat));
+    /* ~130px — both ramps + flat */
+    --xnn-inset-total: calc(var(--xnn-inset-flat-end) + var(--xnn-inset-ramp));
+
+    --xnn-chamfer-clip: polygon(
+      var(--xnn-c-tl) 0,
+      var(--xnn-inset-left) 0,
+      calc(var(--xnn-inset-left) + var(--xnn-inset-ramp)) var(--xnn-inset-depth),
+      calc(var(--xnn-inset-left) + var(--xnn-inset-flat-end)) var(--xnn-inset-depth),
+      calc(var(--xnn-inset-left) + var(--xnn-inset-total)) 0,
+      calc(100% - var(--xnn-c-tr)) 0,
+      100% var(--xnn-c-tr),
+      100% calc(100% - var(--xnn-c-br)),
+      calc(100% - var(--xnn-c-br)) 100%,
+      var(--xnn-c-bl) 100%,
+      0 calc(100% - var(--xnn-c-bl)),
+      0 var(--xnn-c-tl)
+    );
+
+    padding: 1px;
+    background: var(--color-line);
+    clip-path: var(--xnn-chamfer-clip);
+  }
+
+  .xnn-chamfer__inner {
+    background: var(--color-surface);
+    clip-path: var(--xnn-chamfer-clip);
+    padding-top: var(--xnn-edge-pad);
+    padding-bottom: var(--xnn-edge-pad);
+  }
+}

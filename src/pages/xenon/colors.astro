@@ -1,0 +1,28 @@
+---
+import XenonDocsLayout from '~/layouts/XenonDocsLayout.astro';
+import { ColorScaleRow, SemanticSwatch } from '~/components/xenon/ColorPalette';
+import { colorScales, statusScales, semanticColors } from '~/components/xenon/tokens';
+---
+
+<XenonDocsLayout
+  title="Colors"
+  description="OKLCH scales and semantic tokens. Click a swatch to copy its token name."
+  path="/xenon/colors"
+>
+  <h2>Scales</h2>
+  <div class="not-prose mt-4 space-y-6">
+    {colorScales.map((scale) => (
+      <ColorScaleRow client:visible name={scale.name} prefix={scale.prefix} steps={scale.steps} />
+    ))}
+    {statusScales.map((scale) => (
+      <ColorScaleRow client:visible name={scale.name} prefix={scale.prefix} steps={scale.steps} />
+    ))}
+  </div>
+
+  <h2>Semantic tokens</h2>
+  <div class="not-prose mt-4 grid grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-3 lg:grid-cols-5">
+    {semanticColors.map((swatch) => (
+      <SemanticSwatch client:visible {...swatch} />
+    ))}
+  </div>
+</XenonDocsLayout>

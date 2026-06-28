@@ -1,0 +1,84 @@
+---
+import Layout from './Layout.astro';
+import ArticleShare from '~/components/article/ArticleShare.astro';
+import { ArticleComments } from '~/components/article/ArticleComments';
+import JsonLd from '~/components/app/JsonLd.astro';
+import ReadingProgress from '~/components/article/ReadingProgress.astro';
+import ArticleHeader from '~/components/article/ArticleHeader.astro';
+import { heroImageDimensions, heroImageSrc } from '~/lib/articles/hero-images';
+import { getReadingTimeMinutes } from '~/lib/articles/reading-time';
+import { articleHref, allowsComments, nostrDocumentId, publishesToNostr, type ArticleEntry } from '~/lib/articles/posts';
+import { SITE } from '~/site.config';
+
+export interface Props {
+  post: ArticleEntry;
+}
+
+const { post } = Astro.props;
+const { title, description, pubDate, updatedDate, tags, heroImage, heroImageAlt, canonicalUrl } = post.data;
+const nostrEventId = publishesToNostr(post) ? post.data.nostrEventId : undefined;
+const commentSlug = nostrDocumentId(post);
+const canonical = canonicalUrl || `${SITE.url}${articleHref(post)}`;
+const readingTimeMinutes = getReadingTimeMinutes(post.body ?? '');
+const resolvedHeroImage = heroImageSrc(heroImage);
+const resolvedHeroImageDimensions = heroImageDimensions(heroImage);
+
+---
+
+<Layout
+  title={title}
+  description={description}
+  canonical={canonical}
+  ogType="article"
+  ogImage={resolvedHeroImage}
+  ogImageAlt={heroImageAlt}
+  ogImageWidth={resolvedHeroImageDimensions.width}
+  ogImageHeight={resolvedHeroImageDimensions.height}
+  publishedTime={pubDate}
+  modifiedTime={updatedDate}
+  articleTags={tags}
+>
+  <JsonLd
+    title={title}
+    description={description}
+    pubDate={pubDate}
+    updatedDate={updatedDate}
+    canonical={canonical}
+    tags={tags}
+    heroImage={resolvedHeroImage}
+  />
+  <div class:list={["xnn-container-wide -mt-8 xl:max-w-6xl", allowsComments(post) ? "-mb-8" : "mb-8 pb-8"]}>
+    <div class="xnn-grid xnn-grid--flush">
+      <aside class="hidden lg:xnn-col-span-2 lg:block lg:border-r lg:border-line lg:pr-10">
+        <div class="sticky top-24 py-3">
+          <ReadingProgress title={title} pubDate={pubDate} readingTimeMinutes={readingTimeMinutes} tag={tags[0]} slug={commentSlug} showCommentCount={allowsComments(post)} />
+        </div>
+      </aside>
+
+      <article data-article-body class="xnn-col-span-full min-w-0 overflow-hidden pt-8 pb-16 lg:xnn-col-span-8 lg:px-10 lg:pt-10">
+        <div class="mb-6 flex items-center justify-between lg:hidden">
+          <p class="xnn-meta">{pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+          <ArticleShare title={title} url={canonical} nostrEventId={nostrEventId} />
+        </div>
+      <ArticleHeader
+        title={title}
+        description={description}
+        heroImage={heroImage}
+        heroImageAlt={heroImageAlt}
+      />
+      <div class="xnn-prose">
+        <slot />
+      </div>
+      {allowsComments(post) && (
+        <ArticleComments client:visible slug={commentSlug} nostrEventId={nostrEventId} />
+      )}
+      </article>
+
+      <aside class="hidden lg:xnn-col-span-2 lg:block lg:border-l lg:border-line lg:pl-6">
+        <div class="sticky top-24 flex justify-start py-3">
+          <ArticleShare title={title} url={canonical} nostrEventId={nostrEventId} />
+        </div>
+      </aside>
+    </div>
+  </div>
+</Layout>
