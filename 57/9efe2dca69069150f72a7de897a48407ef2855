@@ -1,0 +1,81 @@
+src/content/news/zenon-network-quarterly-update-q3-2024.md
+  s_ebe97b4a95a937::t_f5559d5606157f 10
+scripts/publish-nostr.ts
+  s_5b7dfb342ab3ee::t_7a3ededda6e6df 167-170
+  s_5b7dfb342ab3ee::t_3182e2298fc1e9 8
+src/components/pulse/usePulseFeed.ts
+  s_5b7dfb342ab3ee::t_89d923a6033aa4 11
+  s_5b7dfb342ab3ee::t_5e35f30d7c73d9 50
+  s_5b7dfb342ab3ee::t_78c6a7a383bfaa 70
+src/lib/nostr/events.ts
+  s_5b7dfb342ab3ee::t_0270104975b0c0 267,272,279,285
+  s_5b7dfb342ab3ee::t_d3c72518fe304d 13
+src/content/kya/stark-of-zenon.md
+  s_ebe97b4a95a937::t_5a08f8713a7a52 7
+src/content/news/building-culture-without-leaders.md
+  s_ebe97b4a95a937::t_f37dfa13817546 7
+src/content/news/new-to-crypto-set-up-zenon-network-node.md
+  s_ebe97b4a95a937::t_5805ed0d7281eb 7
+src/content/news/a-z-the-engine-of-innovation.md
+  s_ebe97b4a95a937::t_1c024f3ace3411 7
+src/components/pulse/PulseCreatePostPage.tsx
+  s_5b7dfb342ab3ee::t_a038b795c7f2ff 198-205
+  s_5b7dfb342ab3ee::t_4801b7a6d71a39 24
+.github/workflows/deploy.yml
+  s_b8b46665cf3226::t_67832183652420 45-48
+src/content/news/how-to-bridge-wznn-to-native-znn-on-the-network-of-momentum-nom.md
+  s_ebe97b4a95a937::t_f152576a976356 7
+src/content/news/alien-trap-society-x-accelerator-z.md
+  s_ebe97b4a95a937::t_8136689dee84e7 9
+src/content/news/zenon-network-quarterly-update-q2-2024.md
+  s_ebe97b4a95a937::t_3f3287e0cecded 9
+src/content/news/zenon-network-quarterly-update-q4-2024.md
+  s_ebe97b4a95a937::t_c21e2cb371dcd2 9
+src/content/kya/sugoi.md
+  s_ebe97b4a95a937::t_d757d17886293d 7
+src/lib/nostr/atsocy-tags.ts
+  s_5b7dfb342ab3ee::t_3c5516663ea497 27-40
+  s_5b7dfb342ab3ee::t_bce13c0fe14bd3 1-26,41-56
+src/components/pulse/PulsePostPage.tsx
+  s_5b7dfb342ab3ee::t_b9d18f7a8fe975 218
+  s_5b7dfb342ab3ee::t_ee22f4a16224bb 224-232
+  s_5b7dfb342ab3ee::t_98d904207773eb 19
+src/lib/nostr/events/polls.ts
+  s_5b7dfb342ab3ee::t_bfbfce22637dfe 8
+  s_5b7dfb342ab3ee::t_60311430b957b6 125
+  s_5b7dfb342ab3ee::t_3687a3866854ee 132-134,142
+src/lib/nostr/mock-events.ts
+  s_5b7dfb342ab3ee::t_27abab9f82a5cb 167-168,173-174,177-181
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "579efe2dca69069150f72a7de897a48407ef2855",
+  "prompts": {},
+  "sessions": {
+    "s_5b7dfb342ab3ee": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "05fd9bbf-a7cf-4661-97ea-1bf6542ae1f8",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "ATSocy // Plasma King <125772172+PlasmaKing@users.noreply.github.com>"
+    },
+    "s_b8b46665cf3226": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f0c8d-186b-75d1-9d46-050f5ee7f7cf",
+        "model": "gpt-5.4"
+      },
+      "human_author": "ATSocy // Plasma King <125772172+PlasmaKing@users.noreply.github.com>"
+    },
+    "s_ebe97b4a95a937": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1bf4892e-95ff-4c7d-9f0b-72c0ba6a7141",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "ATSocy // Plasma King <125772172+PlasmaKing@users.noreply.github.com>"
+    }
+  }
+}
