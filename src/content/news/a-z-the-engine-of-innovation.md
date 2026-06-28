@@ -4,6 +4,7 @@ description: Y Combinator got an upgrade.
 pubDate: '2024-07-24'
 updatedDate: '2024-07-24'
 draft: false
+nostr: false
 tags:
   - accelerator-z
   - zenon-network

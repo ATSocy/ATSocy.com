@@ -4,6 +4,7 @@ description: The Purest Alien DNA in Our Ecosystem
 pubDate: '2024-01-23'
 updatedDate: '2024-03-15'
 draft: false
+nostr: false
 tags:
   - interview
   - community

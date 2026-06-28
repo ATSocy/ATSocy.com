@@ -6,6 +6,7 @@ description: Discover the Limitless Potential of Decentralization
 pubDate: '2023-11-25'
 updatedDate: '2023-12-01'
 draft: false
+nostr: false
 tags:
   - zenon
   - zenonnetwork

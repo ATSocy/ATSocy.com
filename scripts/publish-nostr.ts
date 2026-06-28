@@ -5,6 +5,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import matter from 'gray-matter';
 import { finalizeEvent, getPublicKey, nip19, SimplePool } from 'nostr-tools';
+import { ATSOCY_TOPICS, withAtsocyTags } from '../src/lib/nostr/atsocy-tags';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -163,7 +164,10 @@ async function publishPosts(): Promise<PublishResult[]> {
           tagsArray.push(['image', imageUrl]);
         }
 
-        const template = buildEventTemplate(tagsArray, parsed.content);
+        const template = buildEventTemplate(
+          withAtsocyTags(tagsArray, ATSOCY_TOPICS.editorial),
+          parsed.content,
+        );
         const publishHash = eventFingerprint(template);
         const existingEventId = typeof data.nostrEventId === 'string' ? data.nostrEventId : undefined;
         const existingPublishHash = typeof data.nostrPublishedHash === 'string' ? data.nostrPublishedHash : undefined;

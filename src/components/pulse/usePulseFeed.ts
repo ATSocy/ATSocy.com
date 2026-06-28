@@ -8,6 +8,7 @@ import {
   type PostNode,
 } from '~/lib/nostr/events';
 import { USE_MOCK_EVENTS } from '~/config/feeds';
+import { ATSOCY_TOPICS } from '~/lib/nostr/atsocy-tags';
 import type { NostrEvent } from '@nostrify/types';
 
 export interface PulseFeedOptions {
@@ -46,7 +47,7 @@ export function usePulseFeed(options: PulseFeedOptions = {}) {
   const key = (scope: string) => ['nostr', 'pulse', scope, scopeKey] as string[];
 
   const postFilter = useMemo(
-    () => [{ kinds: [1, 1068], ...(since ? { since } : {}) }],
+    () => [{ kinds: [1, 1068], '#t': [ATSOCY_TOPICS.pulse], ...(since ? { since } : {}) }],
     [since],
   );
   const reactionFilter = useMemo(() => [{ kinds: [7] }], []);
@@ -66,7 +67,7 @@ export function usePulseFeed(options: PulseFeedOptions = {}) {
   // Live subscriptions: stream new events from other clients into the cache.
   // `since: mountedAt` limits the stream to events that arrive after mount.
   const live = !USE_MOCK_EVENTS;
-  useNostrSubscription(postsQueryKey, [{ kinds: [1, 1068], since: mountedAt.current }], { enabled: live });
+  useNostrSubscription(postsQueryKey, [{ kinds: [1, 1068], '#t': [ATSOCY_TOPICS.pulse], since: mountedAt.current }], { enabled: live });
   useNostrSubscription(reactionsQueryKey, [{ kinds: [7], since: mountedAt.current }], { enabled: live });
   useNostrSubscription(pollResponsesQueryKey, [{ kinds: [1018], since: mountedAt.current }], { enabled: live });
 

@@ -6,6 +6,7 @@ description: >-
 pubDate: '2024-07-18'
 updatedDate: '2024-07-18'
 draft: false
+nostr: false
 tags:
   - network-of-momentum
   - zenon

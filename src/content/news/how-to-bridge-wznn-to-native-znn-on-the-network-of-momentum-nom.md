@@ -4,6 +4,7 @@ description: An Alien Holds Your Hand and Helps You Cross the Ether
 pubDate: '2024-07-17'
 updatedDate: '2024-07-17'
 draft: false
+nostr: false
 tags:
   - ethereum
   - zenon

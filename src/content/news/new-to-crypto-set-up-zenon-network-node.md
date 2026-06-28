@@ -4,6 +4,7 @@ description: 'Join the Revolution: A Step-by-Step Guide to Becoming a ZNN Node O
 pubDate: '2023-12-26'
 updatedDate: '2023-12-27'
 draft: false
+nostr: false
 tags:
   - 2articles1week
   - devops

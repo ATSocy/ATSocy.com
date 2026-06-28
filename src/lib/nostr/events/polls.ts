@@ -5,6 +5,7 @@
  * Alien-vs-Guest client split), and compute per-option display math. Nothing
  * here touches React, gsap, or the network.
  */
+import { ATSOCY_SIGNER_TAG } from '~/lib/nostr/atsocy-tags';
 import type { NostrEvent } from '@nostrify/types';
 
 /** Parsed poll option from a kind 1068 event. */
@@ -121,16 +122,16 @@ export function countPollResponses(
   return counts;
 }
 
-/** Per-option vote breakdown by client type (guest vs extension). */
+/** Per-option vote breakdown by signer type (guest vs extension). */
 export interface PollClientCounts {
   guest: number;
   extension: number;
 }
 
 /**
- * Count poll responses per option, split by client type. Responses with
- * `['client', 'guest']` tag count as guest votes; all others as extension.
- * One vote per pubkey (latest wins, per NIP-88).
+ * Count poll responses per option, split by signer type. Responses with an
+ * `['atsocy-signer', 'guest']` tag count as guest votes; all others as
+ * extension. One vote per pubkey (latest wins, per NIP-88).
  */
 export function countPollResponsesByClient(
   responses: NostrEvent[],
@@ -138,7 +139,7 @@ export function countPollResponsesByClient(
 ): Map<string, PollClientCounts> {
   const counts = new Map<string, PollClientCounts>();
   for (const r of latestPollResponses(responses, pollEventId).values()) {
-    const isGuest = r.tags.some((t) => t[0] === 'client' && t[1] === 'guest');
+    const isGuest = r.tags.some((t) => t[0] === ATSOCY_SIGNER_TAG && t[1] === 'guest');
     const bucket = isGuest ? 'guest' : 'extension';
     for (const id of responseTagIds(r)) {
       const existing = counts.get(id) ?? { guest: 0, extension: 0 };

@@ -164,15 +164,21 @@ const mockPoll = ev(
 );
 
 // Poll votes (kind 1018, NIP-88)
-// Some votes include ['client', 'guest'] to simulate guest vs extension mix.
+// Some votes include ['atsocy-signer', 'guest'] to simulate guest vs extension
+// mix; `client` stays reserved for app identity (ATSocy).
 const POLL_VOTE = (voter: string, optionId: string) => [
   ['e', noteId(POLL_ID), '', 'root'],
   ['response', optionId],
   ['p', voter],
+  ['client', 'ATSocy'],
+  ['atsocy-signer', 'nip07'],
 ];
 const POLL_VOTE_GUEST = (voter: string, optionId: string) => [
-  ...POLL_VOTE(voter, optionId),
-  ['client', 'guest'],
+  ['e', noteId(POLL_ID), '', 'root'],
+  ['response', optionId],
+  ['p', voter],
+  ['client', 'ATSocy'],
+  ['atsocy-signer', 'guest'],
 ];
 
 const mockPollVotes: NostrEvent[] = [

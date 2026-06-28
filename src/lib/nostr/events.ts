@@ -10,6 +10,7 @@
  */
 import { nip19 } from 'nostr-tools';
 import { shortNpub } from '~/lib/identity/nostr-identity';
+import { ATSOCY_TOPICS, withAtsocyTags } from '~/lib/nostr/atsocy-tags';
 import type { NostrEvent } from '@nostrify/types';
 
 // Types
@@ -263,25 +264,25 @@ export function articleCommentTemplate(opts: {
     return {
       kind: 1111,
       content: opts.content,
-      tags: [
+      tags: withAtsocyTags([
         ...rootTags,
         ['e', opts.parent.id, hint, opts.parent.pubkey],
         ['k', '1111'],
         ['p', opts.parent.pubkey, hint],
-      ],
+      ], ATSOCY_TOPICS.comments),
     };
   }
 
   return {
     kind: 1111,
     content: opts.content,
-    tags: [
+    tags: withAtsocyTags([
       ...rootTags,
       ['a', addr, hint],
       ['e', opts.articleEventId, hint, opts.editorialPubkey],
       ['k', '30023'],
       ['p', opts.editorialPubkey, hint],
-    ],
+    ], ATSOCY_TOPICS.comments),
   };
 }
 

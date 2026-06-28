@@ -4,6 +4,7 @@ description: The corporate world is on the brink of a revolution.
 pubDate: '2024-10-21'
 updatedDate: '2024-10-21'
 draft: false
+nostr: false
 tags:
   - bitcoin
   - nostr

@@ -6,6 +6,7 @@ description: >-
 pubDate: '2025-01-20'
 updatedDate: '2025-01-20'
 draft: false
+nostr: false
 tags:
   - zenon-network
   - zenon

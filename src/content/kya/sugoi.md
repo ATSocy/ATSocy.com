@@ -4,6 +4,7 @@ description: Life Behind the Screen as a Zitadel Citizen
 pubDate: '2024-03-15'
 updatedDate: '2024-08-30'
 draft: false
+nostr: false
 tags:
   - interview
   - community

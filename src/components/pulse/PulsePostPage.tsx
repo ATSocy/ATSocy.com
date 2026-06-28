@@ -16,6 +16,7 @@ import { usePublish } from '~/lib/nostr/usePublish';
 import { pulsePostHref } from '~/lib/pulse/routes';
 import { clearPulsePost, takePulsePost } from '~/lib/pulse/post-cache';
 import { usePostPageQuery } from './usePostPageQuery';
+import { ATSOCY_CLIENT_TAG, ATSOCY_TOPICS, signerTag, withAtsocyTags } from '~/lib/nostr/atsocy-tags';
 import {
   authorNameFromMeta,
   buildReplyTree,
@@ -214,16 +215,21 @@ function PulsePostPageInner({ noteId: noteIdProp }: PulsePostPageInnerProps) {
     await publish({
       kind: 1,
       content: text,
-      tags: [...eTags, ['p', toEvent.pubkey, '']],
+      tags: withAtsocyTags([...eTags, ['p', toEvent.pubkey, '']], ATSOCY_TOPICS.pulse),
     });
   }
 
   async function pollVote(optionId: string) {
     if (!rootEvent || !isPoll) return;
-    const tags: string[][] = [['e', rootEvent.id], ['response', optionId]];
-    if (logins[0]?.type === 'nsec') {
-      tags.push(['client', 'guest']);
-    }
+    // `client` stays reserved for app identity (ATSocy); how the vote was signed
+    // (disposable guest nsec vs. NIP-07 extension) is recorded under atsocy-signer.
+    const signer = logins[0]?.type === 'nsec' ? 'guest' : 'nip07';
+    const tags: string[][] = [
+      ['e', rootEvent.id],
+      ['response', optionId],
+      [ATSOCY_CLIENT_TAG[0], ATSOCY_CLIENT_TAG[1]],
+      signerTag(signer),
+    ];
     await publish({ kind: 1018, content: '', tags });
   }
 

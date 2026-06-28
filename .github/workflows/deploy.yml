@@ -42,6 +42,10 @@ jobs:
         env:
           SITE_URL: ${{ vars.SITE_URL || 'https://atsocy.com' }}
           PUBLIC_USE_MOCK_EVENTS: 'false'
+          PUBLIC_NOSTR_RELAYS: ${{ vars.PUBLIC_NOSTR_RELAYS || 'wss://relay.atsocy.com' }}
+          PUBLIC_BLOSSOM_SERVERS: ${{ vars.PUBLIC_BLOSSOM_SERVERS || 'https://media.atsocy.com' }}
+          PUBLIC_ATS_NPUB: ${{ vars.PUBLIC_ATS_NPUB || 'npub1hjn08rv4ymjgtpr6uzechwmzcfhet457vczxy8qlq2xaq836mutsp737yw' }}
+          PUBLIC_HOT_PULSE_WINDOW_HOURS: ${{ vars.PUBLIC_HOT_PULSE_WINDOW_HOURS || '72' }}
         run: npm run build
 
       - name: Deploy to Cloudflare Pages

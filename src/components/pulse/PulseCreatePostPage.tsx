@@ -21,6 +21,7 @@ import { pulsePostHref } from '~/lib/pulse/routes';
 import { MediaUploadField, type UploadedMedia } from '~/components/pulse/MediaUploadField';
 import { XnnDateTimePicker } from '~/components/ui/XnnDateTimePicker';
 import { XnnTabs, XnnTabsList, XnnTabsPanel, XnnTabsTab } from '~/components/ui/XnnTabs';
+import { ATSOCY_TOPICS, withAtsocyTags } from '~/lib/nostr/atsocy-tags';
 import { eventContent, normalizeExternalUrl, defaultEndsAt, makeOption, type PollOption } from './post-forms';
 
 const CONTROL = 'w-full rounded-[18px] border border-line bg-canvas px-4 py-3 text-body-sm text-fg outline-none transition-colors placeholder:text-fg-muted focus:border-accent';
@@ -194,7 +195,14 @@ function FormShell({
         setState({ status: 'idle' });
         return;
       }
-      const event = await publish(result.template);
+      // Every Pulse post/poll authored here carries the ATSocy attribution tags;
+      // stamping them once here keeps the per-type build() functions focused on
+      // their own content/tags.
+      const template = {
+        ...result.template,
+        tags: withAtsocyTags(result.template.tags, ATSOCY_TOPICS.pulse),
+      };
+      const event = await publish(template);
       onReset();
       cachePulsePost(event);
       const kindLabel = event.kind === 1068 ? 'Poll' : 'Post';
