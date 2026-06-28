@@ -1,0 +1,24 @@
+src/components/pulse/PulseRow.tsx
+  s_23efcf60246b25::t_931c380619e58f 5,157,194
+  s_23efcf60246b25::t_92ef2c7ca1b3b4 115
+src/lib/nostr/events.ts
+  s_23efcf60246b25::t_14b13990ef2e4d 397,408-411
+  s_23efcf60246b25::t_aece98c8e04e18 391-396,398-401,406-407,412-416
+  s_23efcf60246b25::t_28f4f9a76ee080 402-405
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "74e79a961df5555090c37b68cb7f21ff53f8a3cc",
+  "prompts": {},
+  "sessions": {
+    "s_23efcf60246b25": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_0ef9d0ad8ffe17IUVFnYoFCLoa",
+        "model": "gpt-5.4"
+      },
+      "human_author": "ATSocy // Plasma King <125772172+PlasmaKing@users.noreply.github.com>"
+    }
+  }
+}
