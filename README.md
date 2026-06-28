@@ -60,6 +60,11 @@ Deploys go to Cloudflare Pages via Wrangler (`npm run wrangler:deploy`). Publish
 
 Components are grouped by feature, not by file type. `.astro` is server-rendered shell; `.tsx` hydrates on the client.
 
+## Public API
+
+- `https://api.atsocy.com/dev-activity.json` — recent activity across tracked Zenon ecosystem repos
+- `https://api.atsocy.com/prices.json` — ZNN and QSR prices in sats, ETH, and USD
+
 ## Contributing
 
 Open an issue or a [Discussion](https://github.com/ATSocy/ATSocy.com/discussions) to start. Pull requests are welcome — just open one first so we can align before you ship code.
