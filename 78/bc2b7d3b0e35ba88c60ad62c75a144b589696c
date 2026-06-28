@@ -1,0 +1,20 @@
+README.md
+  s_ee5302de01c628::t_b533ff845ff62f 65-66
+  s_ee5302de01c628::t_8e28e00b645a4c 63-64,67
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "78bc2b7d3b0e35ba88c60ad62c75a144b589696c",
+  "prompts": {},
+  "sessions": {
+    "s_ee5302de01c628": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6ce85c35-f5bd-4d84-aa96-11b35f5571fe",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "ATSocy // Plasma King <125772172+PlasmaKing@users.noreply.github.com>"
+    }
+  }
+}
