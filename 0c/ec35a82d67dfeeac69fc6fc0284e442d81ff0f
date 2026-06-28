@@ -1,0 +1,33 @@
+src/content/news/the-most-unexplored-architecture-in-crypto.md
+  s_b8b46665cf3226::t_634d3069d06f24 13
+src/content/news/atsocy-com-is-no-longer-just-a-blog.md
+  s_b8b46665cf3226::t_634d3069d06f24 14
+.github/workflows/deploy.yml
+  s_ee5302de01c628::t_d79ddd0e832fe3 10-12
+  s_ee5302de01c628::t_b8a71c2fcc252f 55
+  s_ee5302de01c628::t_b202f8b9d33f63 37
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "0cec35a82d67dfeeac69fc6fc0284e442d81ff0f",
+  "prompts": {},
+  "sessions": {
+    "s_b8b46665cf3226": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f0c8d-186b-75d1-9d46-050f5ee7f7cf",
+        "model": "gpt-5.4"
+      },
+      "human_author": null
+    },
+    "s_ee5302de01c628": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6ce85c35-f5bd-4d84-aa96-11b35f5571fe",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": null
+    }
+  }
+}
