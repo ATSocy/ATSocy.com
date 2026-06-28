@@ -1,0 +1,333 @@
+ops/media/route96.config.yaml
+  s_b8b46665cf3226::t_8db944f4efc3f9 1-60
+ops/relay/whitelist-policy.mjs
+  s_d55d45e76088c6::t_ce59b0fdfeaa2f 1-34
+package-lock.json
+  s_687b9f85583a3b::t_0bf2844458504d 1-14321
+public/.well-known/nostr.json
+  s_d55d45e76088c6::t_338c12c4649a9b 1-6
+scripts/fetch-dev-activity.ts
+  s_d55d45e76088c6::t_c7caa7c565ff3f 1-537
+scripts/fetch-prices.ts
+  s_d55d45e76088c6::t_26069d46fe71bf 1-168
+scripts/seed-pulse.ts
+  s_d55d45e76088c6::t_bae0af09f97133 1-223
+src/components/app/Footer.astro
+  s_687b9f85583a3b::t_60412ad23f392b 1-220
+src/components/app/Head.astro
+  s_d55d45e76088c6::t_e78acb58209471 1-112
+src/components/app/Header.astro
+  s_d55d45e76088c6::t_fbcddef363214f 1-25
+src/components/app/JsonLd.astro
+  s_d55d45e76088c6::t_e6bdc4996c4846 1-57
+src/components/article/ArticleCommentCount.tsx
+  s_d55d45e76088c6::t_7ff25809b2777d 1-35
+src/components/article/ArticleComments.tsx
+  s_d55d45e76088c6::t_c3c9ba6026a318 1-143
+src/components/article/ArticleHeader.astro
+  s_d55d45e76088c6::t_e4acfdcf063a61 1-33
+src/components/article/ArticleShare.astro
+  s_d55d45e76088c6::t_b23e7f124b253b 1-178
+src/components/article/AuthorAvatar.tsx
+  s_d55d45e76088c6::t_6bc6c8e881f3ce 1-35
+src/components/article/CommentParts.tsx
+  s_d55d45e76088c6::t_b2760eb22351a0 1-138
+src/components/article/HeroImage.astro
+  s_d55d45e76088c6::t_608ac93965d74a 1-34
+src/components/article/ReadingProgress.astro
+  s_d55d45e76088c6::t_c22ed141102917 1-83
+src/components/article/VoteButton.tsx
+  s_d55d45e76088c6::t_bb5a07fdfb7d3d 1-117
+src/components/editorial/AlienPulseCta.tsx
+  s_d55d45e76088c6::t_ae0e1f1ba4b327 1-56
+src/components/editorial/EditorialCard.astro
+  s_d55d45e76088c6::t_1796ffd469d07c 1-80
+src/components/editorial/KnowYourAlienSection.astro
+  s_d55d45e76088c6::t_ab969c1a607966 1-104
+src/components/icons/AiBadgeIcon.tsx
+  s_d55d45e76088c6::t_fbb7b7d5b334c0 1-10
+src/components/icons/AtsocyAlienIcon.tsx
+  s_d55d45e76088c6::t_0457438077c6f2 1-9
+src/components/icons/ExternalLinkIcon.tsx
+  s_d55d45e76088c6::t_3283e91b8d3b1a 1-10
+src/components/icons/NostrIcon.tsx
+  s_d55d45e76088c6::t_eb615948dd25f4 1-9
+src/components/identity/DisplayNameEditor.tsx
+  s_d55d45e76088c6::t_5f9568d28437d8 1-84
+src/components/identity/EditNameIcon.tsx
+  s_d55d45e76088c6::t_b725e9a3123218 1-15
+src/components/identity/LoginWithNostrButton.tsx
+  s_d55d45e76088c6::t_794d9ce25d653e 1-24
+src/components/identity/Nip05Badge.tsx
+  s_d55d45e76088c6::t_0e4f90b523def7 1-51
+src/components/identity/UserMenu.tsx
+  s_d55d45e76088c6::t_0d126ae304d309 1-340
+src/components/market/PriceTicker.astro
+  s_d55d45e76088c6::t_28ae89bbafac91 1-8
+src/components/market/PriceTicker.tsx
+  s_d55d45e76088c6::t_106280742c5d33 1-106
+src/components/nostr/NostrIsland.tsx
+  s_d55d45e76088c6::t_dac093431b594f 1-28
+src/components/nostr/NostrLoginProvider.tsx
+  s_d55d45e76088c6::t_1dff473ef80bd5 1-120
+src/components/nostr/NostrProvider.tsx
+  s_d55d45e76088c6::t_08f9c281445bfe 1-36
+src/components/nostr/NostrRelayStatus.tsx
+  s_d55d45e76088c6::t_67c980117e4b88 1-133
+src/components/pulse/LinkCard.tsx
+  s_d55d45e76088c6::t_987a61c7a99259 1-24
+src/components/pulse/MediaUploadField.tsx
+  s_d55d45e76088c6::t_0cd763fa3b95e7 1-174
+src/components/pulse/PollBar.tsx
+  s_d55d45e76088c6::t_2519fe9de25fee 1-64
+src/components/pulse/PollCard.tsx
+  s_d55d45e76088c6::t_f5c901c80e5fef 1-304
+src/components/pulse/PulseCreatePostPage.tsx
+  s_d55d45e76088c6::t_b0e358c9aa5765 1-496
+src/components/pulse/PulseHotSlot.tsx
+  s_d55d45e76088c6::t_a351d9197ef724 1-116
+src/components/pulse/PulseShareButton.tsx
+  s_d55d45e76088c6::t_e9d224b43fc560 1-198
+src/components/pulse/post-forms.ts
+  s_d55d45e76088c6::t_c574abb69bd641 1-71
+src/components/pulse/useFlipReorder.ts
+  s_d55d45e76088c6::t_7861dcf3bf7d14 1-190
+src/components/pulse/usePostPageQuery.ts
+  s_d55d45e76088c6::t_7d4eece77604b5 1-45
+src/components/pulse/usePulseFeed.ts
+  s_d55d45e76088c6::t_382d61a67456c6 1-105
+src/components/pulse/voteAnimation.ts
+  s_d55d45e76088c6::t_ca73981dca7d93 1-14
+src/components/rails/AgentationDev.tsx
+  s_d55d45e76088c6::t_02deca99989217 1-7
+src/components/rails/ChannelsRail.tsx
+  s_d55d45e76088c6::t_baa048d25de691 1-178
+src/components/ui/BouncingDotsLoader.tsx
+  s_d55d45e76088c6::t_1f6540dae47988 1-21
+src/components/ui/CopyPrompt.tsx
+  s_d55d45e76088c6::t_8aee885f687a3b 1-53
+src/components/ui/FlashToast.tsx
+  s_d55d45e76088c6::t_c0f332f139615a 1-50
+src/components/ui/InfiniteList.astro
+  s_d55d45e76088c6::t_82f7ad1f8883db 1-44
+src/components/ui/InfoIcon.tsx
+  s_d55d45e76088c6::t_88831c3f1be487 1-11
+src/components/ui/Logo.tsx
+  s_d55d45e76088c6::t_423eb1f6196653 1-26
+src/components/ui/TechRule.astro
+  s_d55d45e76088c6::t_92e167653420fc 1
+src/components/ui/XnnCalendar.tsx
+  s_d55d45e76088c6::t_286c6bf7e5a8db 1-78
+src/components/ui/XnnCommitPopover.tsx
+  s_d55d45e76088c6::t_428f00096fbca8 1-103
+src/components/ui/XnnDateTimePicker.tsx
+  s_d55d45e76088c6::t_63b7457eae24a6 1-90
+src/components/ui/XnnTabs.tsx
+  s_d55d45e76088c6::t_750376ede0f885 1-65
+src/components/ui/XnnTimePicker.tsx
+  s_d55d45e76088c6::t_28432d71322a23 1-144
+src/components/ui/picker-styles.ts
+  s_d55d45e76088c6::t_1472ad7dfb3a37 1-20
+src/components/xenon/ColorPalette.tsx
+  s_d55d45e76088c6::t_f36153fa4dab9c 1-64
+src/components/xenon/DocRow.astro
+  s_d55d45e76088c6::t_0a237870cb5191 1-16
+src/components/xenon/DocRows.astro
+  s_d55d45e76088c6::t_1170803ef0482d 1-6
+src/components/xenon/Gallery.tsx
+  s_d55d45e76088c6::t_2addad02719fb6 1-532
+src/components/xenon/GridVisual.tsx
+  s_d55d45e76088c6::t_c43de0d5f4abb2 1-19
+src/components/xenon/TechDivider.astro
+  s_d55d45e76088c6::t_1298462e41a684 1-102
+src/components/xenon/XenonDocsShell.astro
+  s_d55d45e76088c6::t_6bab5957f5348d 1-169
+src/components/xenon/inventory.ts
+  s_d55d45e76088c6::t_6ccdc466b9203a 1-398
+src/components/xenon/navigation.ts
+  s_d55d45e76088c6::t_28f024a8502579 1-79
+src/components/xenon/tokens.ts
+  s_d55d45e76088c6::t_8654e32bb64ae4 1-141
+src/config/blossom.ts
+  s_d55d45e76088c6::t_714e8a0e9e8749 1-9
+src/config/dev-activity-sources.json
+  s_d55d45e76088c6::t_417f2ed5ea0b04 1-14
+src/config/feeds.ts
+  s_d55d45e76088c6::t_bb6ad848005e07 1-68
+src/content/guides/contribute.mdx
+  s_d55d45e76088c6::t_37e99f0030daa6 1-165
+src/content/kya/stark-of-zenon.md
+  s_d55d45e76088c6::t_78dd3857379872 1-147
+src/content/news/a-z-the-engine-of-innovation.md
+  s_d55d45e76088c6::t_86f8d317e43f61 1-149
+src/content/news/atsocy-com-is-no-longer-just-a-blog.md
+  s_d55d45e76088c6::t_6f75de94ac3489 1-93
+src/content/news/how-to-bridge-wznn-to-native-znn-on-the-network-of-momentum-nom.md
+  s_d55d45e76088c6::t_38ad50491d2547 1-198
+src/content/news/new-to-crypto-set-up-zenon-network-node.md
+  s_d55d45e76088c6::t_1aca4d794eaa3f 1-484
+src/content/news/the-most-unexplored-architecture-in-crypto.md
+  s_d55d45e76088c6::t_f0ab2d8f74a4eb 1-186
+src/content/news/zenon-network-quarterly-update-q2-2024.md
+  s_d55d45e76088c6::t_033bfe83c07880 1-294
+src/env.d.ts
+  s_d55d45e76088c6::t_a6583ffbfd74c0 1-9
+src/layouts/Layout.astro
+  s_d55d45e76088c6::t_c4b1a5e13e655a 1-29
+src/layouts/Post.astro
+  s_d55d45e76088c6::t_b7ebfd34ed1a00 1-84
+src/layouts/XenonDocsLayout.astro
+  s_d55d45e76088c6::t_32ba014715ab77 1-19
+src/lib/activity/dev-activity.ts
+  s_d55d45e76088c6::t_5ade18f0e5f327 1-24
+src/lib/articles/hero-images.ts
+  s_d55d45e76088c6::t_90047daf019430 1-17
+src/lib/articles/posts.ts
+  s_d55d45e76088c6::t_d113a5df371e44 1-37
+src/lib/articles/reading-time.ts
+  s_d55d45e76088c6::t_c1f4abbfb592ad 1-13
+src/lib/articles/remark-ats-commentary.ts
+  s_d55d45e76088c6::t_05bcea35f76ffd 1-95
+src/lib/articles/useArticleComments.ts
+  s_d55d45e76088c6::t_6890d79f8dad6d 1-103
+src/lib/blossom/useBlossomUpload.ts
+  s_d55d45e76088c6::t_f1701d313e947d 1-31
+src/lib/identity/nostr-identity.ts
+  s_d55d45e76088c6::t_a22292eaa7de51 1-30
+src/lib/identity/useAutoGuestLogin.ts
+  s_d55d45e76088c6::t_871f4f0818ea8d 1-27
+src/lib/identity/useCurrentUser.ts
+  s_d55d45e76088c6::t_4e578ba7ca87f5 1-31
+src/lib/identity/useLoginActions.ts
+  s_d55d45e76088c6::t_60cd7f22ab8302 1-34
+src/lib/identity/useNip05.ts
+  s_d55d45e76088c6::t_4b67b3b2d33bb9 1-39
+src/lib/identity/useNip07Extension.ts
+  s_d55d45e76088c6::t_ead621c4d723d9 1-59
+src/lib/identity/useProfileName.tsx
+  s_d55d45e76088c6::t_7c7a4e32e7e1f6 1-30
+src/lib/identity/useSaveProfileName.ts
+  s_d55d45e76088c6::t_d5273c4ff7d58f 1-32
+src/lib/market/zenon-prices.ts
+  s_d55d45e76088c6::t_4fec93f5f62f9e 1-56
+src/lib/nostr/client.ts
+  s_d55d45e76088c6::t_52dd12d3886d9e 1-94
+src/lib/nostr/events/polls.ts
+  s_d55d45e76088c6::t_834d6a8494918b 1-189
+src/lib/nostr/mock-events.ts
+  s_d55d45e76088c6::t_21cb3264e05f62 1-345
+src/lib/nostr/useNostrQuery.ts
+  s_d55d45e76088c6::t_3d4eecd6cf9258 1-22
+src/lib/nostr/useNostrSubscription.ts
+  s_d55d45e76088c6::t_b5135f1f749235 1-52
+src/lib/nostr/usePublish.ts
+  s_d55d45e76088c6::t_3cf0f50dd1ca8e 1-50
+src/lib/pulse/post-cache.ts
+  s_d55d45e76088c6::t_86d979a6be01f4 1-57
+src/lib/pulse/routes.ts
+  s_d55d45e76088c6::t_ec06b0da6196cb 1-3
+src/lib/ui/cx.ts
+  s_d55d45e76088c6::t_067c7fcc6837b6 1-4
+src/lib/ui/flash-toast.ts
+  s_d55d45e76088c6::t_fea91ac43c8df6 1-27
+src/lib/ui/motion.ts
+  s_d55d45e76088c6::t_f98165a9b9c983 1-16
+src/lib/ui/seo.ts
+  s_d55d45e76088c6::t_a7604936ddd44b 1-42
+src/lib/ui/useCopyToClipboard.ts
+  s_d55d45e76088c6::t_4cabbaa56e5cfd 1-32
+src/middleware.ts
+  s_d55d45e76088c6::t_f1129baa1d93e8 1-23
+src/pages/404.astro
+  s_d55d45e76088c6::t_90659f08e207d1 1-18
+src/pages/[slug].astro
+  s_d55d45e76088c6::t_2b1de8f83731af 1-23
+src/pages/create-post.astro
+  s_d55d45e76088c6::t_f2605f86b3a083 1-10
+src/pages/guides/[slug].astro
+  s_d55d45e76088c6::t_e892ea63231183 1-23
+src/pages/guides/index.astro
+  s_d55d45e76088c6::t_186ff72bbb19dc 1-56
+src/pages/index.astro
+  s_d55d45e76088c6::t_8b7dfd59e7ca33 1-143
+src/pages/kya.astro
+  s_d55d45e76088c6::t_632344990fa4ce 1-46
+src/pages/kya/[slug].astro
+  s_d55d45e76088c6::t_40dad63e097563 1-23
+src/pages/news.astro
+  s_d55d45e76088c6::t_e3b9e1d0958dfc 1-56
+src/pages/p/index.astro
+  s_d55d45e76088c6::t_abb1104dd6644e 1-17
+src/pages/rss.xml.ts
+  s_d55d45e76088c6::t_13c721947e845c 1-28
+src/pages/xenon/accessibility.astro
+  s_d55d45e76088c6::t_33932fb62aac7d 1-14
+src/pages/xenon/colors.astro
+  s_d55d45e76088c6::t_40dd9b087f43ed 1-28
+src/pages/xenon/components/[slug].astro
+  s_d55d45e76088c6::t_e6a61f58b6f951 1-26
+src/pages/xenon/components/index.astro
+  s_d55d45e76088c6::t_a4a38ea3b37c38 1-26
+src/pages/xenon/contributing.astro
+  s_d55d45e76088c6::t_7479d9fcf1c046 1-14
+src/pages/xenon/index.astro
+  s_d55d45e76088c6::t_bd069be94dd936 1-68
+src/pages/xenon/layout.astro
+  s_d55d45e76088c6::t_56d8c3c9228e5a 1-110
+src/pages/xenon/materials.astro
+  s_d55d45e76088c6::t_5d3d01686d6487 1-36
+src/pages/xenon/spacing.astro
+  s_d55d45e76088c6::t_37393c0ddce98b 1-23
+src/pages/xenon/typography.astro
+  s_d55d45e76088c6::t_c7b4742979a11a 1-32
+src/site.config.ts
+  s_d55d45e76088c6::t_5597287223dc7e 1-10
+src/styles/ats-commentary.css
+  s_d55d45e76088c6::t_09c12a458195c9 1-161
+src/styles/design-system.css
+  s_d55d45e76088c6::t_11b3c7fca1a852 1-1062
+src/styles/global.css
+  s_b8b46665cf3226::t_a2c57d3720abf0 1-46
+src/styles/xnn-chamfer.css
+  s_d55d45e76088c6::t_3aa5fc6468a9df 1-56
+src/styles/xnn-divider.css
+  s_d55d45e76088c6::t_b0af72fa85abbe 1-83
+src/styles/xnn-grid.css
+  s_d55d45e76088c6::t_6f74e370679cad 1-77
+src/styles/xnn-tech-rule.css
+  s_d55d45e76088c6::t_82119296a3c084 1-34
+tsconfig.json
+  s_d55d45e76088c6::t_9c231c90dc6b42 1-9
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "c51078e82dc16ada7bb970b94539bee5040c7936",
+  "prompts": {},
+  "sessions": {
+    "s_687b9f85583a3b": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "019f0d08-d542-7553-a8a3-af082719dcc0",
+        "model": "glm-5.2"
+      },
+      "human_author": "ATSocy // Plasma King <125772172+PlasmaKing@users.noreply.github.com>"
+    },
+    "s_b8b46665cf3226": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f0c8d-186b-75d1-9d46-050f5ee7f7cf",
+        "model": "gpt-5.4"
+      },
+      "human_author": "ATSocy // Plasma King <125772172+PlasmaKing@users.noreply.github.com>"
+    },
+    "s_d55d45e76088c6": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f0c88-e281-7d71-8276-c2c93fbf009d",
+        "model": "gpt-5.5"
+      },
+      "human_author": "ATSocy // Plasma King <125772172+PlasmaKing@users.noreply.github.com>"
+    }
+  }
+}
