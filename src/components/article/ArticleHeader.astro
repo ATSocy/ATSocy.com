@@ -27,7 +27,8 @@ const { title, description, heroImage, heroImageAlt } = Astro.props;
       alt={heroImageAlt}
       widths={[800, 1200, 1600]}
       sizes="(max-width: 1024px) 100vw, 1150px"
-      class="relative left-1/2 mt-8 w-[115%] max-w-none -translate-x-1/2 border border-line"
+      frameClass="relative left-1/2 mt-8 w-[115%] max-w-none -translate-x-1/2 border border-line"
+      class="block h-auto w-full"
     />
   )}
 </header>

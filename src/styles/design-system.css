@@ -306,6 +306,51 @@
     animation: xnn-skeleton-shimmer 1.5s infinite;
   }
 
+  /*
+   * Hero image skeleton — stacks the placeholder (shimmer + icon) and the image
+   * in one grid cell. The image is held transparent until its `load` event sets
+   * `data-loaded` (see HeroImage.astro), which hides the browser's native
+   * loading placeholder and cross-fades the real image in.
+   */
+  .xnn-img-frame {
+    display: grid;
+  }
+
+  .xnn-img-frame > * {
+    grid-area: 1 / 1;
+    min-width: 0;
+  }
+
+  .xnn-img-skeleton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-fg-muted);
+    font-size: clamp(2.25rem, 6vw, 3.5rem);
+    opacity: 1;
+    pointer-events: none;
+    transition: opacity 350ms ease;
+  }
+
+  .xnn-img-frame[data-loaded] .xnn-img-skeleton {
+    opacity: 0;
+  }
+
+  .xnn-img {
+    transition: opacity 350ms ease;
+  }
+
+  .xnn-img:not([data-loaded]) {
+    opacity: 0 !important;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .xnn-img-skeleton,
+    .xnn-img {
+      transition: none;
+    }
+  }
+
   .xnn-dev-activity-skeleton {
     display: flex;
     flex-direction: column;

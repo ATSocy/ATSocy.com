@@ -151,7 +151,8 @@ function PulseHotInner({ limit = 3, windowHours = 72 }: PulseHotProps) {
   const hotPosts = useMemo(() => tree.toSorted(byHot).slice(0, limit), [tree, limit]);
 
   if (postsQ.isPending || reactionsQ.isPending) return <PulseFeedSkeleton count={limit} />;
-  if (hotPosts.length === 0) return null;
+  if (hotPosts.length === 0)
+    return <p className="flex min-h-32 items-center justify-center text-center xnn-meta" data-nosnippet>No POTD yet.</p>;
 
   const topEntry: PulseHotEntry = {
     post: hotPosts[0],

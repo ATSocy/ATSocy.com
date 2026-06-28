@@ -48,7 +48,9 @@ const knowYourAlienPosts = (await getCollection('kya', (post) => !post.data.draf
             <header class="flex justify-center">
               <img src="/atsocy-potd.png" alt="ATSocy Post of the Day" class="w-48 max-w-full" />
             </header>
-            <PulseHot client:load limit={1} windowHours={HOT_PULSE_WINDOW_HOURS} />
+            <div class="min-h-[8rem]">
+              <PulseHot client:load limit={1} windowHours={HOT_PULSE_WINDOW_HOURS} />
+            </div>
             <div class="flex justify-center">
               <a
                 href="#pulse"

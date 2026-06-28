@@ -5,6 +5,13 @@
  * single owner of the local-vs-remote branch; call sites pass responsive sizes
  * and let it decide the element.
  *
+ * While the bytes load, the image is held at `opacity: 0` and a skeleton
+ * (shimmer + placeholder icon) shows underneath. This hides the browser's
+ * native loading placeholder (the flash of alt text / file path) and avoids a
+ * blank box. A tiny script reveals each image on `load`. Set `skeleton={false}`
+ * for images that are already hidden by the caller (e.g. a hover-only overlay),
+ * so their own opacity handling isn't overridden.
+ *
  * See `src/lib/articles/hero-images.ts` for the `HeroImage` type and helpers.
  */
 import { Image } from 'astro:assets';
@@ -19,16 +26,97 @@ export interface Props {
   sizes?: string;
   /** Native loading hint. Local images default to `eager` (hero is above the fold). */
   loading?: 'eager' | 'lazy';
+  /** Wrap in the skeleton frame and fade in on load. Default `true`. */
+  skeleton?: boolean;
+  /**
+   * Classes for the skeleton frame (the positioned box). Put box/layout classes
+   * here — width, position, transform, border, aspect-ratio — so the skeleton
+   * shares the image's exact geometry. Image-fit classes (`object-cover`, etc.)
+   * belong on `class`. Ignored when `skeleton={false}`.
+   */
+  frameClass?: string;
   class?: string;
 }
 
-const { image, alt = '', widths, sizes, loading = 'eager', class: className } = Astro.props;
+const {
+  image,
+  alt = '',
+  widths,
+  sizes,
+  loading = 'eager',
+  skeleton = true,
+  frameClass,
+  class: className,
+} = Astro.props;
+
+const isLocal = image ? isLocalHeroImage(image) : false;
+const remoteSrc = typeof image === 'string' ? image : undefined;
 ---
 
 {
-  image && isLocalHeroImage(image) ? (
-    <Image src={image} alt={alt} widths={widths} sizes={sizes} class={className} />
-  ) : (
-    <img src={typeof image === 'string' ? image : undefined} alt={alt} class={className} loading={loading} decoding="async" />
-  )
+  image &&
+    (skeleton ? (
+      <span class:list={['xnn-img-frame', frameClass]} data-img-frame>
+        <span class="xnn-img-skeleton xnn-skeleton-shimmer" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M14 9a1.5 1.5 0 1 1 3 0a1.5 1.5 0 0 1-3 0" />
+            <path
+              fill="currentColor"
+              fill-rule="evenodd"
+              d="M7.268 4.658a54.7 54.7 0 0 1 9.465 0l1.51.132a3.14 3.14 0 0 1 2.831 2.66a30.6 30.6 0 0 1 0 9.1a3.14 3.14 0 0 1-2.831 2.66l-1.51.131c-3.15.274-6.316.274-9.465 0l-1.51-.131a3.14 3.14 0 0 1-2.832-2.66a30.6 30.6 0 0 1 0-9.1a3.14 3.14 0 0 1 2.831-2.66zm9.335 1.495a53 53 0 0 0-9.206 0l-1.51.131A1.64 1.64 0 0 0 4.41 7.672a29 29 0 0 0-.311 5.17L7.97 8.97a.75.75 0 0 1 1.09.032l3.672 4.13l2.53-.844a.75.75 0 0 1 .796.21l3.519 3.91l.014-.08a29.1 29.1 0 0 0 0-8.656a1.64 1.64 0 0 0-1.478-1.388zm2.017 11.435l-3.349-3.721l-2.534.844a.75.75 0 0 1-.798-.213l-3.471-3.905l-4.244 4.243q.073.748.185 1.491a1.64 1.64 0 0 0 1.478 1.389l1.51.131c3.063.266 6.143.266 9.206 0l1.51-.131c.178-.016.35-.06.507-.128"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </span>
+        {isLocal ? (
+          <Image
+            src={image}
+            alt={alt}
+            widths={widths}
+            sizes={sizes}
+            loading={loading}
+            class:list={['xnn-img', className]}
+            data-img
+          />
+        ) : (
+          <img
+            src={remoteSrc}
+            alt={alt}
+            loading={loading}
+            decoding="async"
+            class:list={['xnn-img', className]}
+            data-img
+          />
+        )}
+      </span>
+    ) : isLocal ? (
+      <Image src={image} alt={alt} widths={widths} sizes={sizes} loading={loading} class={className} />
+    ) : (
+      <img src={remoteSrc} alt={alt} class={className} loading={loading} decoding="async" />
+    ))
 }
+
+<script>
+  function revealImage(img: HTMLImageElement): void {
+    img.setAttribute('data-loaded', '');
+    img.closest('[data-img-frame]')?.setAttribute('data-loaded', '');
+  }
+
+  function initHeroImages(): void {
+    const images = document.querySelectorAll<HTMLImageElement>('img[data-img]:not([data-loaded])');
+    images.forEach((img) => {
+      // `complete` is true for cached/already-decoded images (the `load` event
+      // won't fire again) and for errored ones — reveal either way so an image
+      // is never left stuck invisible.
+      if (img.complete) {
+        revealImage(img);
+        return;
+      }
+      img.addEventListener('load', () => revealImage(img), { once: true });
+      img.addEventListener('error', () => revealImage(img), { once: true });
+    });
+  }
+
+  initHeroImages();
+  document.addEventListener('astro:page-load', initHeroImages);
+</script>

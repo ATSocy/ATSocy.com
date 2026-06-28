@@ -57,6 +57,7 @@ const dividerVariants = ['shelf', 'dots', 'stripes'] as const;
               alt={splitPartner.data.heroImageAlt}
               widths={[768, 1280, 1600]}
               sizes="(max-width: 768px) 100vw, (max-width: 1280px) 66vw, 960px"
+              skeleton={false}
               class="block aspect-[16/9] w-full object-cover opacity-0 transition-opacity duration-300 group-has-[.editorial-hero-alt:hover]/editorial-hero:opacity-100"
             />
           )}
