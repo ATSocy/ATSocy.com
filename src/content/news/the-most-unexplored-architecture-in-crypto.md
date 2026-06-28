@@ -10,6 +10,7 @@ tags:
   - network-of-momentum
 heroImage: ./the-most-unexplored-architecture-in-crypto.webp
 heroImageAlt: Alien research archive revealing hidden network architecture and protocol documents
+nostrEventId: 42c7360fd0d48d3f340becd1190f26770ceaf020f3747b0877743f7ea99b83aa
 ---
 
 ## A strange architecture just got decoded.

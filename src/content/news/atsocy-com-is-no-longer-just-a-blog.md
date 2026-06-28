@@ -11,6 +11,7 @@ tags:
   - pulse
 heroImage: ./atsocy-com-is-no-longer-just-a-blog.webp
 heroImageAlt: ATSocy control center for aliens with editorial, Pulse, and live network activity
+nostrEventId: ce19ab67e4ae3844d9608727f8dd5ff0e310bc81305135e8f9e9c2902d2a9b32
 ---
 
 ## What happened to the old site?
