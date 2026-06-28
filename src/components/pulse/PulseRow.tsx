@@ -2,7 +2,7 @@ import { memo, useRef, useState } from 'react';
 import { usePublish } from '~/lib/nostr/usePublish';
 import {
   authorNameFromMeta,
-  displayUrl,
+  displayCompactUrl,
   formatRelativeTime,
   reactionTemplate,
   summarize,
@@ -112,7 +112,7 @@ function PulseRowImpl({ post, meta, myVote, pollResponses = [], rowRef, onVoteIn
       <a href={rowHref} className="absolute inset-0 z-0" aria-label={`Open post: ${summary.title}`} />
 
       <article
-        className="pointer-events-none relative z-10 flex items-center gap-4 px-6 py-4 transition-colors hover:bg-raised/60 sm:px-8 lg:px-10"
+        className="pointer-events-none relative z-10 flex items-center gap-3 px-4 py-4 transition-colors hover:bg-raised/60 sm:gap-4 sm:px-8 lg:px-10"
       >
         <div className="flex shrink-0 flex-col items-center justify-center gap-1">
           <VoteButton direction="up" active={vote === 'up'} className="pointer-events-auto" onClick={(e) => { e.stopPropagation(); void onVote('up'); }} />
@@ -154,7 +154,7 @@ function PulseRowImpl({ post, meta, myVote, pollResponses = [], rowRef, onVoteIn
                 <span className="inline-flex items-center text-accent sm:hidden" aria-label="External link">
                   <ExternalLinkIcon size={14} />
                 </span>
-                <span className="hidden text-accent xnn-caption sm:inline">{displayUrl(summary.url)}</span>
+                <span className="hidden max-w-[18rem] truncate text-accent xnn-caption sm:inline lg:max-w-[24rem]">{displayCompactUrl(summary.url)}</span>
               </>
             )}
             <span>{formatRelativeTime(post.event.created_at)}</span>
@@ -191,7 +191,7 @@ function PulseRowImpl({ post, meta, myVote, pollResponses = [], rowRef, onVoteIn
 function PulseRowSkeleton({ index = 0 }: { index?: number }) {
   return (
     <li aria-hidden="true">
-      <article className="flex items-center gap-4 px-6 py-4 sm:px-8 lg:px-10">
+      <article className="flex items-center gap-3 px-4 py-4 sm:gap-4 sm:px-8 lg:px-10">
         <div className="flex shrink-0 flex-col items-center justify-center gap-1">
           <span className="xnn-skeleton-shimmer h-4 w-4 rounded-full" />
           <span className="xnn-skeleton-shimmer h-3 w-6 rounded-full" />

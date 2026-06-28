@@ -388,6 +388,32 @@ export function displayUrl(url: string): string {
   }
 }
 
+/** Compact hostname + tail filename/path segment for tight feed metadata. */
+export function displayCompactUrl(url: string): string {
+  try {
+    const parsed = new URL(url);
+    const segments = parsed.pathname.split('/').filter(Boolean);
+    const tail = segments.at(-1);
+    const full = displayUrl(url);
+
+    if (!tail) return parsed.hostname;
+
+    if (parsed.hostname === 'media.atsocy.com') {
+      const dot = tail.lastIndexOf('.');
+      const stem = dot > 0 ? tail.slice(0, dot) : tail;
+      const extension = dot > 0 ? tail.slice(dot) : '';
+      return `${parsed.hostname}/...${stem.slice(-6)}${extension}`;
+    }
+
+    const maxLength = 38;
+    if (full.length <= maxLength) return full;
+
+    return `${full.slice(0, maxLength - 1)}…`;
+  } catch {
+    return url;
+  }
+}
+
 /**
  * Split raw kind-1 content into a title (first non-empty line), body (the
  * remaining lines joined with `\n`), and a URL. The body is `null` when there
