@@ -1,0 +1,20 @@
+.github/workflows/deploy.yml
+  s_ee5302de01c628::t_b202f8b9d33f63 34
+  s_ee5302de01c628::t_b8a71c2fcc252f 52
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "cdbb080ae2f4b666d965bf0f3620e84989d980b8",
+  "prompts": {},
+  "sessions": {
+    "s_ee5302de01c628": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6ce85c35-f5bd-4d84-aa96-11b35f5571fe",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "ATSocy // Plasma King <125772172+PlasmaKing@users.noreply.github.com>"
+    }
+  }
+}
