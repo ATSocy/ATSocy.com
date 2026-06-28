@@ -1,0 +1,31 @@
+src/components/editorial/EditorialHero.astro
+  s_ee5302de01c628::t_fb726e611e81a5 60
+src/components/article/HeroImage.astro
+  s_ee5302de01c628::t_7d436a44666b5a 8-14,29-30,41-47,49-53,57-58,60-96,98-122
+  s_ee5302de01c628::t_6114422ddfcbff 31-37,48
+  s_ee5302de01c628::t_795fc3cf60bdb3 59
+src/styles/design-system.css
+  s_ee5302de01c628::t_6d32a70afb52f2 309-353
+src/components/article/ArticleHeader.astro
+  s_ee5302de01c628::t_81c93a33cd1656 30-31
+src/pages/index.astro
+  s_ee5302de01c628::t_729445f8f2337c 51-53
+src/components/pulse/Pulse.tsx
+  s_ee5302de01c628::t_5dca39d329c42e 154-155
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "54259946a350925a75f4b249b0de7c56bb835c6f",
+  "prompts": {},
+  "sessions": {
+    "s_ee5302de01c628": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6ce85c35-f5bd-4d84-aa96-11b35f5571fe",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "ATSocy // Plasma King <125772172+PlasmaKing@users.noreply.github.com>"
+    }
+  }
+}
